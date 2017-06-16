@@ -1,0 +1,31 @@
+\documentclass{standalone}
+\usepackage{diplomski}
+
+\begin{document}
+
+\chapter{Sensing method}
+\pagenumbering{arabic}
+\setcounter{page}\thestranica
+
+% --------------------------------------
+
+The distributed sensing method described in this thesis is based on the optical time-domain refractometry (abbr. OTDR) method. In its elementary form, OTDR is used for characterizing an optical fibre or an optical link along its length. The effect enabling this kind of measurement is the backscattered Rayleigh signal. After sending an optical signal along the fibre, Rayleigh scattering will occur at each point in the fibre. A part of the produced scattered signal will propagate in the backward direction, which enables capturing of the scattering at the same fibre end that the optical signal was sent from. The received signal can be decoupled and observed by a photodiode connected to an oscilloscope. The oscilloscope will be triggered by the initial optical pulse, which can be delivered from the optical source itself. By applying the relation 
+\begin{equation} \label{eq:otdr_time_distance}
+z_0 = \frac{c}{n_\textrm{eff}} \cdot \frac{t_0}{2}
+\end{equation}
+that connects the elapsed time, as shown by the oscilloscope, with the propagated distance, one can use the x-axis of the oscilloscope as an indication as to where along the length of the fibre the scattering observed on the y-axis took place. The resulting image is, thus, the fibre profile along its length. A sample measurement is shown in Figure \ref{fig:otdr_sample}.
+%%% FIGURE
+%\label{fig:otdr_sample}
+The loss introduced by Rayleigh scattering is manifested by a slope in the measured profile. Fibre attenuation can be easily retrieved by determining the slope. Other anomalies of the fibre can be observed, such as splicing and connector losses, reflections off fibre ends, etc. 
+% rezolucija i impuls
+\\
+
+The described OTDR method can be applied for measuring other effects occurring in fibres. For distributed temperature sensing, one can either observe Brillioun or Raman scattering. Brillioun scattering produces a relatively narrow-band frequency shift. The information on temperature is extrapolated from the value of the frequency shift. Therefore, a Brillioun scattering-based system operates by monitoring the optical spectrum. Raman scattering, on the other hand, produces a far larger frequency shift. The produced frequency-shifted components can be easily filtered by means of an optical filter. Information on temperature is obtained by monitoring the optical intensity of shifted signals. Therefore, a Raman scattering-based system utilizes simpler equipment and measurement method. 
+
+
+% --------------------------------------
+
+\setcounter{stranica}{\thepage}
+\addtocounter{stranica}{1}
+
+\end{document}

@@ -1,0 +1,49 @@
+\documentclass{standalone}
+\usepackage{diplomski}
+
+\begin{document}
+
+\chapter{Fibre-optic technology}
+\pagenumbering{arabic}
+\setcounter{page}\thestranica
+
+% --------------------------------------
+
+Optical fibre enables propagation of light by means of total reflection occurring within its core. Fibres consist of a number of cylindrical layers, the innermost being the core, surrounded by cladding. The two layers are further enclosed in a jacket, following a number of shields and isolation materials, depending on the required cable rigidity and specified applications. A number of standard fibre-optic cables are used in communication systems.
+
+single mode
+
+multimode
+
+\section{Fibre losses and linear effects}
+
+In modern communication applications, optical fibres impose as the best data transfer medium. The qualities of an optical fibre supersede those of electrical low- and high-frequency conductors. Firstly, optical fibres employ a much higher frequency range, enabling broad-spectra data transfer. The medium is, thus, utilized to a much greater extent than, for example, a coaxial cable operating in ultra-high frequency range under 1 GHz. Also, optical fibres have proven to be much more durable in terms of both mechanical endurance and immunity to electromagnetic interference. In communication and sensing applications, optical fibres represent a reliable, resilient medium. \\
+
+In normal conditions, optical power in the fibre attenuates as governed by Beer's law. Optical power at any point in the fibre can be expressed by
+\begin{equation}
+P(z_0) = P_\textrm{in} \exp\left(-\alpha z_0\right) \textrm{,}
+\end{equation}
+where $\alpha$ is the attenuation coefficient in units of Np/km. For convenience, $\alpha$ is usually expressed in units of dB/km. Losses in a fibre depend on the optical wavelength. In communication systems, three \emph{optical communication windows} were defined as wavelengths where silica fibre exhibits minimum losses. The first around 850 nm (not as used in modern systems), the second around 1310 nm and the third around 1550 nm. These windows arise as a result of wavelength dependence of fibre material absorption, which represents the absorption by fused silica and due to the presence of impurities. The other fundamental loss mechanism is Rayleigh scattering. It arises from microscopic density fluctuations of silica that lead to refractive index fluctuations on a scale smaller than the optical wavelength. The contribution of Rayleigh scattering to the overall fibre loss can be expressed as
+\begin{equation}
+\alpha_\textrm{Ray} = C / \lambda^4 \textrm{.}
+\end{equation}
+Rayleigh scattering is, thus, largely dependant on wavelength. \\
+
+
+\section{Non-linear optical effects}
+
+
+
+% Compare Raman and Brillioun
+% Spontaneous and stimulated
+
+%Other non-linear effects exist...
+
+
+
+% --------------------------------------
+
+\setcounter{stranica}{\thepage}
+\addtocounter{stranica}{1}
+
+\end{document}

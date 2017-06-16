@@ -1,0 +1,44 @@
+\documentclass{standalone}
+\usepackage{diplomski}
+
+\begin{document}
+
+\chapter{Laboratory setup}
+\pagenumbering{arabic}
+\setcounter{page}\thestranica
+
+% --------------------------------------
+
+In order to use Raman scattering for temperature measurement, a laser source must be capable of producing sufficiently short optical impulses, so as to meet spatial resolution requirements, as described by equation \ref{eq:otrd_spatial_resolution}. In this laboratory setup, an Optilab NPL-1550-37-R nanosecond pulse laser was used as the optical source. The laser is capable of producing pulses down to 2 ns in width, with a repetition rate of 100 Hz to 1 MHz. The energy of a single pulse can be up to 100 \textmu J. High optical power is achieved using a dual-stage amplifier, capable of producing a continuous optical power of 37 dBm, while operating in the 1543 -- 1570 nm region. High-power laser output is factory-couple into a single-mode fibre pigtail. Also, a 1\% tap FC output is available, which will be used in this setup for triggering the DAQ device. \\
+
+The measurement setup is displayed in Figure \ref{fig:lab_setup}.
+%%\label{fig:lab_setup}
+The laser's high-power output is protected from backscattered signals by an isolator placed immediately after the output pigtail. Although the majority of amplified spontaneous emission (abbr. ASE) from laser's integrated amplifiers is already filtered \cite{datasheet:laser}, an additional filter is placed after the isolator, to ensure the ASE is well attenuated. The selected filter is a dense wavelength-division multiplex (abbr. DWDM) filter, centred at \cite{datasheet:dwdm_filter}
+\begin{equation}
+\label{eq:dwdm_filter_centre}
+\lambda_0 = \SI{1550}{\nano \meter}
+\end{equation} and a pass bandwidth 
+\begin{equation}
+\label{eq:dwdm_filter_bw}
+\varDelta f = \SI{200}{\giga \hertz} \textrm{.}
+\end{equation}
+Although the filter is specified to be able to withstand a continuous optical power of 500 mW, in pulse regime the expected tolerance to peak power is much higher. Connecting the rest of the measurement setup to the filter's \textit{pass} output, the initial ASE is now ensured to be negligible. \\
+
+The circulator placed after the DWDM filter is an important component in the measurement setup. In the first setup, single-mode fibres were used as temperature sensing elements. Fibres coupled onto the circulator need to match the structure of the measurement fibre, so as to ensure good coupling and minimum losses of the excitation and reflected signals. The circulator itself is a low insertion loss-device and provides high isolation between ports \cite{datasheet:smf_circualtor}. The circulator has single-mode pigtails. Its port 1 was coupled to the high-power output from the DWDM filter, port 2 to the measurement fibre, and port 3 to the \textit{monitoring branch} of the system. The connection diagram is presented in Figure \ref{fig:circulator_connection}.
+%\label{fig:circulator_connection}
+% \\
+
+Measurement fibres can be single rolls of fibre, or consist of a cascade of a number of fibre rolls. In the single-mode setup, regular SM fibres, compliant to the G.652 standard, were interchanged with highly non-linear fibres, i.e. fibres with a high $\left|\beta_3\right|$ value. The observed measurement-fibre system had a total length of about 5 km. Parts of this fibre system can be inserted into a cooling or heating chamber in order to control the system temperature. The far end of the measurement fibre has to be terminated to reduce reflection of the incident high optical power off the fibre end. Such a reflection could induce SRS at incident optical powers that are normally expected to be sufficiently low to keep the system in the spontaneous Raman-scattering regime. To achieve this, the one option is to use proper terminators. However, reflections can occur on unsuitable optical connectors, such as FC, that inherently exhibit high reflections. The other option is to couple the optical power into the environment, and ensuring power containment by external means. \\
+
+The latter solution was used in the second scenario, where multi-mode fibres replaced single-mode fibres as sensing elements. Between the DWDM filter and the circulator, full optical power from the single-mode-coupled laser was then coupled into multi-mode fibres. A single-mode fibre-based circulator was replaced by a multi-mode version. The new circulator has a multi-mode fibre factory-spliced onto its ports. It also exhibits low insertion losses, and high isolation \cite{datasheet:mmf_circulator}. The high-power input is coupled into circulator port 1, and the fibre-under-test is directly coupled onto port 2. Port 3 was also coupled to the \textit{monitoring branch}. In a multi-mode scenario, the measurement fibre was expected to be able to withstand higher incident powers before exhibiting stimulated non-linear effects. Therefore, a standard G.651-compliant fibre was used for this purpose. A number of fibre rolls were spliced together to increase the total system length. Also, a short patch cable, 50 m in length, was inserted between two longer rolls. This simplified temperature control on a known point in the system. The patch was placed in a pot, in which heating and cooling of the fibre was performed by controlling the temperature of the water surrounding it. The isolation of the fibre patch was left unstripped to pertain its thermal and mechanical endurance.
+
+
+% How everything is configured
+
+
+% --------------------------------------
+
+\setcounter{stranica}{\thepage}
+\addtocounter{stranica}{1}
+
+\end{document}
