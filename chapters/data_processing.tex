@@ -29,9 +29,50 @@ As the monitored Stokes and anti-Stokes signals are very weak, they are highly n
 
 The first implemented algorithm is a simple averaging filter. The filter works well and the measured temperature had a sufficiently small inaccuracy. However, the required averaging time to achieve this precision was more than 5 minutes. Therefore, this method was abandoned in favour of faster algorithms. The next implemented approach was an adaptive filter using the least-mean-square error (abbr. LMS) method. A block diagram of such a filter is presented in Figure \ref{fig:lms_block}.
 %\label{fig:lms_block}
+The linear filter represents an FIR filter. Its function can be expressed as
+\begin{equation}
+y(n) = x(n) \cdot w(n) \textrm{,}
+\end{equation}
+where $w(n)$ is the filter coefficient vector. The output signal $e(n)$ represents an error signal, and is in fact the difference between $y(n)$ and the reference signal $d(n)$. Filter coefficients are updated by an adaptive algorithm. The algorithm compares the filtered signal with the reference after each filter tap. Optimal coefficients are found so as to achieve the minimum mean square error with respect to the reference signal. Coefficients are calculated as
+\begin{equation}
+w(n+1) = w(n) + \mu \, e(n) \, \frac{x(n)}{\| x(n) \| ^2} \textrm{.}
+\end{equation}
+Parameter $\mu$ is the filter parameter. This relation represents a normalized LMS algorithm. As the useful signal and noise are highly uncorrelated, an optimization by a large number of iterations will finally yield a filter that is a close estimate of a Wiener filter. Ideally, a reference signal would be a response of the given measurement fibre under controlled conditions. Such a response could be obtained by a very large number of temperature measurements with a simple averaging filter. The measured data could be further denoised by theoretically considering the characteristics of the specific fibre. This kind of calibration would require careful control of the measuring environment, and could prove to be a very time consuming process. Also, such a filter would result in a system calibrated only for a specific measurement fibre. Errors could occur just by reconnecting the system parts (e.g. reconnecting an optical connector of the measurement fibre). In many practical applications, it is proven sufficient just to use the delayed input signal as the reference. This approach requires multiple criteria on the observed signal to be met. Firstly, the signal should be stationary between a number of iterations. Next, the signal and the noise we wish to filter out need to be uncorrelated. As the noise is dominated by white noise, this criteria is inherently met. Finally, in case the observed signal is narrowband, the noise is required to be broadband. Vice versa applies; If the signal is broadband, the noise is required to be narrowband. The DAQ sampling rate is sufficiently large, and white noise is therefore spread across the entire discrete spectrum. Also, any kind of temperature shift will be mediated to the DAQ card by an optical pulse of short duration, its main spectral component residing at
+\begin{equation}
+f_0 = \SI{40}{\mega \hertz}
+\end{equation}
+for a
+\begin{equation}
+T_0 = \SI{25}{\nano \second}
+\end{equation}
+pulse duration. We may assume any relevant temperature shift to be spectrally limited predominantly around $f_0$. Therefore, the former condition applies. This filter has proven its superiority towards a classic averaging filter. Some time is required for the adaptive filter to converge its coefficients and display the accurate absolute temperature value. However, the overall averaging time required to obtain the same SNR is about one order of magnitude in seconds shorter than that of the classic averaging filter. \\
+
+The approach applied for the two averaging algorithms is to use all the acquired samples while filtering. This requires low memory usage, as once filtered samples may be removed from the memory. However, such a system can not respond to a change in temperature, as averaging would filter the measured change out. To make a responsive system, one must first determine the required averaging time, i.e. the number of averaged samples, required to obtain a sufficient SNR in the measured signals. This will decide on the responsivity of the system. Next, a moving average filter should be implemented. Such a filter utilizes a \textit{filtering window}, taking only a predefined number of samples into account. This requires a large amount of memory, as all the samples in the filtering windows need to persist for proper calculation. Also, the processing time of each filter tap has proven to be extremely long, which is the result of a double float representation in LabVIEW of all the sampled data. \\
+
+After filter, waveforms are obtained, representing the Stokes and anti-Stokes components in time. These can be plotted against a time-scale, that in turn corresponds to a linear position on the measurement fibre. The position is obtained by equation \ref{eq:otdr_time_distance}, where the elementary time unit corresponds to one sampling tap
+\begin{equation}
+t_\textrm{S} = \frac{1}{f_\textrm{S}} = \SI{0.8}{\nano \second} \textrm{.}
+\end{equation}
+An example of acquired signals before and after filtering is given in Figure \ref{fig:daq_example}.
+%\label{fig:daq_example}
 
 
-% Moving average consideration
+% Objasni nagibe zasebno. Imas razlicite nagibe koji se vide i u temperaturi
+
+\section{Calculating the temperature}
+
+The filtered Stokes and anti-Stokes profiles can be used to obtain the measurement fibre's temperature. A new LabVIEW virtual instrument was created for this purpose. It takes the measured signals as inputs, as well as some channel parameters, such as the observed wavelengths that are entered manually, ratios of gains between Stokes and anti-Stokes detection channels. The algorithm uses expression \ref{eq:stokes_temperature} to obtain the temperature. The energy shift is calculated from input parameters as
+\begin{equation}
+\varDelta E = \hbar (\omega_0 - \omega_\textrm{S}) \textrm{,}
+\end{equation}
+where $\omega_0$ is the optical frequency of the initial pulse, and $\omega_\textrm{S}$ the effective frequency of the Stokes component. In this scenario, the effective frequency is assumed, keeping in mind the considerations of the Raman spectrum, as discussed in chapter \ref{ch:fibres}. By using a high-sensitivity optical spectrum analyser, the effective frequency could be measured to obtain a more precise value.
+
+% Ono sto pise u Rektorovoj
+
+% Korekcija nagiba
+
+% Korekcija offseta
+
 
 % --------------------------------------
 
