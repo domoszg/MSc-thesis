@@ -9,8 +9,29 @@
 
 % --------------------------------------
 
+\section{Data acquisition}
+
+The acquired data is processed in LabVIEW 2013 software by National Instruments. The same software solution is used to graphically display the results on the screen. The DAQ card supports a maximum input signal frequency of 500 MHz, which corresponds to a minimum period
+\begin{equation}
+T_\textrm{min} = \SI{2}{\pico \second} \textrm{.}
+\end{equation}
+This ensures proper detection of the source laser optical pulse, and is also well beyond the maximum bandwidth of used photodetectors. The acquisition memory length is set to 50000 samples. In this laboratory setup, this is enough to capture the signal backscattered at the end of the measurement fibre. When using the laser's 1\% tap output for triggering, it was observed that the DAQ card has a transient at the beginning of the acquisition windows. Therefore, the trigger was set to be at the 50\% reference position, meaning that 25000 samples before the trigger, and 25000 samples after the trigger will be acquired. This is still enough to observe backscattering from the entire length of the measurement fibre. Channels connected to Stokes and anti-Stokes-monitoring photodetectors are AC-coupled to the DAQ card. This is to remove the DC bias of the photodetectors that is of no interest in this system. However, given the duty cycle of the initial optical pulse, the measured signal will still be around zero-value when it exits the range of the measurement fibre. However, additional zero-value correction is performed, which will be covered later on. \\
+
+Data acquisition is performed in a while loop, during the entire program runtime. DAQ cards produced by National Instruments are well supported in LabVIEW through an additional driver-toolbox. While repeating the while loop, one must ensure that the DAQ card performs only data acquisition, and not system reconfiguration. Otherwise, acquisition time would greatly deteriorate. The \textit{NI-SCOPE} toolbox provides both an Express VI for data acquisition, as well as separate VI for a more hands-on configuration and acquisition approach. This program used an Express VI. The VI has an optional input \textit{Close}, which has to be connected to a False constant, to ensure the DAQ card is configured only on the first iteration of the while loop the VI resides in. \\
+
+The data processing algorithm is displayed by a block diagram in Figure \ref{fig:program_block}.
+%\label{fig:program_block}
+In order to increase the processing speed, and so as not to skip any acquired samples, separate algorithms were developed, the one handling the data acquisition, and the other for signal processing. The execution sequence is thus separated and handled by LabVIEW. The exchange of acquired data is performed by the queue structure. The queue is ensured to have a sufficient length to fit all the buffered data. LabVIEW inherently halts the data processing algorithm while the queue is empty, i.e. before the data is acquired from the DAQ card.
+
+\section{Filtering}
+
+As the monitored Stokes and anti-Stokes signals are very weak, they are highly noised at the photodetectors' output. By acquiring a large number of samples, and filtering the results, one can increase the SNR of the measured signals. This will finally decrease the measured temperature error. While developing the data processing algorithm, several filtering algorithms were implemented and tested. Important characteristics of the observed noise need to be taken into account while developing the algorithm. For the large part, the noise is white in character, and as such uncorrelated to the useful signal. \\
+
+The first implemented algorithm is a simple averaging filter. The filter works well and the measured temperature had a sufficiently small inaccuracy. However, the required averaging time to achieve this precision was more than 5 minutes. Therefore, this method was abandoned in favour of faster algorithms. The next implemented approach was an adaptive filter using the least-mean-square error (abbr. LMS) method. A block diagram of such a filter is presented in Figure \ref{fig:lms_block}.
+%\label{fig:lms_block}
 
 
+% Moving average consideration
 
 % --------------------------------------
 
