@@ -9,6 +9,65 @@
 
 % --------------------------------------
 
+The laboratory setup described in chapter \ref{ch:setup} enables simple change of measurement fibres, i.e. sensing elements, as well as use of different photodetectors. Here, different sets of single-mode and multi-mode fibres were tested. Different PIN photodiodes with electrical amplifiers and APD diodes were tested, according to table \ref{table:photodiodes}. Additionally, different laser configurations and data processing algorithms were tested in the development process of the measurement system.
+
+\section{Single-mode fibres}
+
+The first setup included single-mode fibres, connected in a manner displayed in Figure \ref{fig:smf_cascade}.
+%\label{fig:smf_cascade}
+On the near side of the measurement and excitation equipment, a 2.3 km-long roll of G.652-compliant single-mode fibre was connected. Its far end was spliced to a 4.2 km-long roll of highly non-linear single-mode fibre, i.e. a fibre with high $\left|\beta_3\right|$ value. Such a fibre will yield a higher non-linear response to the incident optical signal. In other words, lower power will be required to obtain the same SNR in the backscattered signal when using a highly non-linear fibre. Fibres were terminated with an FC terminator, designed to provide minimum reflection. \\
+
+The first measurements were conducted with a simple data processing algorithm, which used only a classical averaging filter. Filtered Stokes and anti-Stokes reflection profiles are presented in Figure \ref{fig:classic_average_compare}, with an averaging time of 15 seconds in Figure \ref{fig:classic_average_compare_15sec} and 7 minutes in Figure \ref{fig:classic_average_compare_7min}.
+%\label{fig:classic_average_compare}
+%\label{fig:classic_average_compare_15sec}
+%\label{fig:classic_average_compare_7min}
+%30.03.
+The SNR improvement with time is evident, although further measurements did not yield any better results. The averaging filter has probably reached its best result in terms of the final SNR, while it still remains a very slow solution for filtering the signals. The next step in data processing algorithm development was the implementation of the adaptive LMS filter. A comparison of results between the two filters is given in Figure \ref{fig:classic_lms_compare}.
+%\label{fig:classic_lms_compare}
+%30.03.
+The presented results are obtained with an averaging time of 7 minutes. While the results are very comparative, certain features of the adaptive LMS algorithm need to be considered. Firstly, in the anti-Stokes graph, the adaptive LMS filter has managed to extract finer features of the scattered profile. While the SNR for the anti-Stokes profile remains roughly the same, higher spectral components that may be the result of a physically measured quantity of interest, have passed through the adaptive LMS filter. Also, it is important to note that the same SNR was achieved with the adaptive LMS filter much sooner than with the classical averaging filter. The graph presented in \ref{fig:classic_lms_compare}, displaying the data from the adaptive LMS filter, had converged to its final form in less than one minute, dramatically decreasing the required measurement time. \\
+
+While still observing the scattering profiles, instead of the calculated temperature, one must estimate the maximum incident optical power that is still below the stimulated Raman scattering threshold. In all the measurements, the first laser EDFA had a constant pump power
+\begin{equation}
+I_1 = \SI{400}{\milli \ampere} \textrm{.}
+\end{equation}
+Lower first pump power setting ensured small ASE, although this has been further filtered. The second pump power was swept, and the peak optical power measured. The qualitative rating of the waveform, as well as the measured temperature inaccuracy is presented in Table \ref{table:power_sweep}.
+\begin{table}[h]
+	\centering
+	\caption{Sweeping optical power with an SM fibre}
+	\label{table:power_sweep}
+	\begin{tabular}{C{2.5cm}|C{2.5cm}|C{2cm}|C{5cm}}
+		\textbf{Pump current [mA]} & \textbf{Pulse peak power [mW]} & \textbf{$\bm{\varDelta T}$ [K]} & \textbf{Qualitative rating} \\
+		\hline \hline
+		600 & 730 & 200 & Profile visible \\
+		700 & 2300 & 75 & -- \\
+		800 & 3000 & 30 & -- \\
+		900 & 3920 & 20 & Visible peak at the end of the profile \\
+		1000 & 5540 & 15 & -- \\
+		1050 & 6565 & 10 & Highly expressed peak at the end of the profile
+	\end{tabular}
+\end{table}
+Pulse duration was set to 50 ns, and the measurement time was under 1 minute. A number of observations can be made here. Firstly, it can be seen that the pump power and the optical power have an irregular connection for this laser. In fact, the laser lacks power regulations, leading to the once set optical power being often unrepeatable in configuration. With some finer measurements, it was observed that a setting of
+\begin{equation}
+I_{2\textrm{max}} = \SI{1010}{\milli \ampere}
+\end{equation}
+yielding an optical power of about
+\begin{equation}
+P_\textrm{max} = \SI{5800}{\milli \watt}
+\end{equation}
+was a repeatable maximum power setting before the effects of SRS become significant. \\
+
+Next, the laser impulse width was swept in order to determine the effect this will have to the measurement inaccuracy. It was shown that the width itself has little effect on the inaccuracy of the measured value itself. It is, however, important to ensure the laser width is long enough that the photodetectors, with their limited bandwidth, faithfully represent the impulse waveform and amplitude. The laser's pulse width can be configured in steps of 2.5 ns, and a value of
+\begin{equation}
+T_{0\textrm{min}} = \SI{12.5}{\nano \second}
+\end{equation}
+was determined as the minimal required pulse width. Shorter pulse width provides a finer spatial resolution, according to \ref{eq:otdr_resolution}. Although, due to the filtering nature of the decimation procedure performed on the calculated temperature profile, selecting a lower resolution will in fact yield a \textit{smoother} temperature profile. This is further discussed in the multi-mode scenario, where more comparative measurements were made. For many future measurements, a pulse width of
+\begin{equation}
+T_0 = \SI{25}{\nano \second}
+\end{equation}
+was selected as a representative configuration. \\
+
+
 
 
 
