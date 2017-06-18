@@ -65,14 +65,47 @@ The filtered Stokes and anti-Stokes profiles can be used to obtain the measureme
 \begin{equation}
 \varDelta E = \hbar (\omega_0 - \omega_\textrm{S}) \textrm{,}
 \end{equation}
-where $\omega_0$ is the optical frequency of the initial pulse, and $\omega_\textrm{S}$ the effective frequency of the Stokes component. In this scenario, the effective frequency is assumed, keeping in mind the considerations of the Raman spectrum, as discussed in chapter \ref{ch:fibres}. By using a high-sensitivity optical spectrum analyser, the effective frequency could be measured to obtain a more precise value.
+where $\omega_0$ is the optical frequency of the initial pulse, and $\omega_\textrm{S}$ the effective frequency of the Stokes component. In this scenario, the effective frequency is assumed, keeping in mind the considerations of the Raman spectrum, as discussed in chapter \ref{ch:fibres}. By using a high-sensitivity optical spectrum analyser, the effective frequency could be measured to obtain a more precise value. \\
 
-% Ono sto pise u Rektorovoj
+The ratio between Stokes and anti-Stokes detection channel is a sum ratio of all the different gain parameters in the channels. Firstly, this includes photodetectors' responsivities, which is different at different wavelengths, even when using the same photodetectors. Next, different photodetectors have different electrical gains, as presented in Table \ref{tab:photodetectors}. All of these differences need to be either measured or taken from the datasheets, and included in the ratio. \\
 
-% Korekcija nagiba
+At different wavelengths, the measurement fibre will have different attenuation coefficients at different wavelengths. If the attenuation coefficient difference is not compensated for, the temperature profile will have a slope, as the temperature and the scattering profiles are joined by a negative exponential function. In a controlled scenario, where the temperature along the measurement fibre is the same, one can apply classic OTDR methods to measure the fibre attenuation at different wavelengths. Figure \ref{fig:otdr_attenuation} is an example measurement that can either be acquired by a classic OTDR system, or can in fact be a measured Stokes or anti-Stokes backscattered profile on a controlled temperature. 
+%\label{fig:otdr_attenuation}
+The y-axis is in logarithmic scale. By measuring the slope of the curve, one can obtain the fibre attenuation at given wavelength as
+\begin{equation}
+\alpha \, \textrm{[dB/km]} = \dfrac{\varDelta P \, \textrm{[dB]}}{\varDelta L \, \textrm{[km]}} \textrm{.}
+\end{equation}
+The program takes attenuation coefficients at Stokes and anti-Stokes wavelengths, $\alpha_\textrm{S}$ and $\alpha_\textrm{AS}$, as input parameters. Assuming a linear change of the attenuation coefficient with wavelength, one can now obtain $\alpha_0$ at laser wavelength and finally, the required attenuation difference due to frequency shift as, e.g.
+\begin{equation}
+\varDelta \alpha_\textrm{P} = \alpha_0 - \alpha_\textrm{S} \textrm{.}
+\end{equation} \\
 
-% Korekcija offseta
+At this point, all the terms in \ref{eq:stokes_temperature} are ready and temperature profile can be obtained. An example profile is given in Figure \ref{fig:temperature_example}.
+%\label{fig:temperature_example}
+%Uzeti SMF mjerenje 11.4.
+One can observe a number of issues on the calculated profile, knowing that the measurement fibre was on the same, room temperature along its length. The measurement was conducted by using a cascade of SMF fibres, first a common G.652-compliant fibre, some 2.3 km in length, followed by a fibre with expressed non-linearities, about 4.2 km in length. The x-axis represents the sample number, corresponding to the sample number of the respective Stokes and anti-Stokes signals. The y-axis is the temperature in Kelvins. It is clear that the fibre with expressed non-linearities provides a much more accurate temperature profile. Also, the measurement is offset from the room temperature, as the correct terms from \ref{eq:stokes_temperatures} are not known. The especially critical term is the correct effective wavelength of Stokes and anti-Stokes scatterings. At this point, reading from the discrete temperature sensor TMP36 is taken and samples at the beginning of the measurement profile, that are known to be from the part of the fibre that is at the same temperature as the discrete sensor, are offset to match the measured temperature. However, one must take care not to calibrate on the part of the measured profile that represents the very beginning or the very end of the fibre. High reflections off optical connectors are manifested as very high absolute temperature errors. Such errors could be mitigated by using better matching at the ends. Also, a trade-off can be found between the incident optical power and the resulting reflection. \\
 
+Additional correction can be performed in order to eliminate the apparent slope of the temperature profile. The slope is the result of an erroneous measurement of the attenuation coefficient difference. Additional correction can be performed by estimating the slope of the resulting temperature profile, and rotating the result in post-processing. Next, the x-axis can be scaled using equation \ref{eq:otdr_time_distance} to represent length, rather than the sample number. However, the number of samples obtained by the measurement corresponds to the number of samples in the Stokes and anti-Stokes signal. Equation \ref{eq:otdr_resolution}, on the other hand, proves that the spatial measurement resolution is tied to the optical impulse width, rather that the sampling rate of the DAQ device. Decimation is performed on the acquired temperature profile to match the actual resolution of the measurement method. Decimation decreases the sampling rate of a discrete signal by removing extra samples from the signal. Averaging can be performed in the process, so that the data from the extra samples is not lost. Decimation factor $R$ is taken as a ratio of original and target sampling rate, and in this case it case be expressed by the laser impulse width $T_0$ as
+\begin{equation}
+R = \frac{f_H}{f_L} = f_H \cdot T_0 \textrm{.}
+\end{equation}
+Given an example
+\begin{equation}
+f_H = \SI{1.25}{\giga S / \second}
+\end{equation}
+\begin{equation}
+T_0 = \SI{25}{\nano \second} \textrm{,}
+\end{equation}
+the calculated decimation factor and the low sampling rate are
+\begin{equation}
+R = 31.25
+\end{equation}
+\begin{equation}
+f_L = \SI{40}{\mega S / \second} \textrm{.}
+\end{equation}
+Sampling rates are given in samples per second for clarity. \\
+
+Some of the suggested corrections were in fact removed from the final program version, as the processing time was too long. Different development platforms or system architectures could be used in future measurement systems, so as to implement better parallelism between the acquisition, basic processing and post-processing tasks of the measurement process.
 
 % --------------------------------------
 
