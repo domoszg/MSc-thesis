@@ -15,7 +15,7 @@ The laboratory setup described in chapter \ref{ch:setup} enables simple change o
 
 The first setup included single-mode fibres, connected in a manner displayed in Figure \ref{fig:smf_cascade}.
 %\label{fig:smf_cascade}
-On the near side of the measurement and excitation equipment, a 2.3 km-long roll of G.652-compliant single-mode fibre was connected. Its far end was spliced to a 4.2 km-long roll of highly non-linear single-mode fibre, i.e. a fibre with high $\left|\beta_3\right|$ value. Such a fibre will yield a higher non-linear response to the incident optical signal. In other words, lower power will be required to obtain the same SNR in the backscattered signal when using a highly non-linear fibre. A step in the scattered signal profile is visible, as a result of different $\left|\beta_3\right|$ coefficients. Fibres were terminated with an FC terminator, designed to provide minimum reflection. \\
+On the near side of the measurement and excitation equipment, a 2.3 km-long roll of G.652-compliant single-mode fibre was connected. Its far end was spliced to a 4.2 km-long roll of highly non-linear single-mode fibre, i.e. a fibre with high $\left|\beta_3\right|$ value. Such a fibre will yield a higher non-linear response to the incident optical signal. In other words, lower power will be required to obtain the same SNR in the backscattered signal when using a highly non-linear fibre. A step in the scattered signal profile is visible, as a result of different $\left|\beta_3\right|$ coefficients, and of the reflection against SC-APC connectors between the fibres. Fibres were terminated with an FC terminator, designed to provide minimum reflection. \\
 
 The first measurements were conducted with a simple data processing algorithm, which used only a classical averaging filter. Filtered Stokes and anti-Stokes reflection profiles are presented in Figure \ref{fig:classic_average_compare}, with an averaging time of 15 seconds in Figure \ref{fig:classic_average_compare_15sec} and 7 minutes in Figure \ref{fig:classic_average_compare_7min}.
 %\label{fig:classic_average_compare}
@@ -77,7 +77,6 @@ f_R = \SI{100}{\hertz}
 \end{equation}
 was found to be sufficient for this purpose. \\
 
-
 An example of the final measurement, at maximum allowable optical power is given in Figure \ref{fig:smf_final}.
 %\label{smf:final}
 %13.04.
@@ -85,13 +84,15 @@ It is clear that only the highly non-linear fibre yields results with a reasonab
 \begin{equation}
 \varDelta T_\textrm{SMF} \approx \SI{20}{\kelvin} \textrm{.}
 \end{equation}
-Further data processing is expected to be able to bring the accuracy down to about 10 K. Measurements were made by PDA10CS-EC photodetectors, with the gain setting set to 40 dB. Therefore, we may expect some rapid temperature changes not to be detected by the system, as this setting provides a very narrow bandwidth. However, the problem with this setup is the accuracy of the sensing element itself, and future use of single-mode fibres was abolished.
+Further data processing is expected to be able to bring the accuracy down to about 10 K. Measurements were made by PDA10CS-EC photodetectors, with the gain setting set to 40 dB. Therefore, we may expect some rapid temperature changes not to be detected by the system, as this setting provides a very narrow bandwidth. However, the problem with this setup is the accuracy of the sensing element itself, and future use of single-mode fibres was abolished. It should be noted that calibration against the discrete temperature sensor was not implemented in LabVIEW at this point, so the measured temperature profile has an offset against the actual fibre temperature.
 
 \section{Multi-mode fibres}
 
 As the effective cross-section area of a multi-mode fibre is larger than that of a single-mode fibre, the former is expected to demonstrate better sensing performance and temperature accuracy for this system. With a requirement that the power density does not cross that used in single-mode fibres at highest optical levels, multi-mode fibres will inherently be able to withstand higher peak optical powers before reaching SRS threshold. \\
 
-As described in chapter \ref{ch:setup}, a lot of the optical components were changed to ensure coupling of all the incident optical power, and capturing all the backscattered power from the measurement fibre. For the first multi-mode setup, a cascade of two G.651-compliant fibres was used. The first fibre was 2.3 km, and the second 1.2 km in length. The two fibres were initially connected by SC-APC connectors, and terminated by another SC-APC connector with no matched termination at the end. \\
+As described in chapter \ref{ch:setup}, a lot of the optical components were changed to ensure coupling of all the incident optical power, and capturing all the backscattered power from the measurement fibre. For the first multi-mode setup, a cascade of two G.651-compliant fibres was used. The setup is presented in Figure \ref{fig:mmf_first_cascade}.
+%\label{fig:mmf_first_cascade}
+The first fibre was 2.3 km, and the second 1.2 km in length. The two fibres were initially connected by SC-APC connectors, and terminated by another SC-APC connector with no matched termination at the end. \\
 
 Different photodetectors were used in this setup. First measurements were performed with PDA10CS-EC with switchable gain. Firstly, the 40 dB setting was used to find the maximum peak optical power that this system could use. Laser's first EDFA pump current was set as in \ref{eq:edfa_first_pump}, while the second EDFA pump current was swept. The qualitative rating of the waveform, and the measured temperature inaccuracy is presented in Table \ref{table:mmf_power_sweep}.
 \begin{table}[h]
@@ -107,11 +108,51 @@ Different photodetectors were used in this setup. First measurements were perfor
 		1250 & 15400 & <5--8 & High reflection off the end of the fibres
 	\end{tabular}
 \end{table}
-
+Multi-mode fibres have proven to be capable of using higher optical powers without inducing SRS, as was expected. Once again, a step in scattering profiles is visible, as a result of reflection against SC-APC connectors between the fibres, which will be dealt with later. A sample scattering profile, acquired with maximum allowed optical power, is shown in Figure \ref{fig:mmf_scatters}. Comparative temperature measurements on two optical powers are also given, in Figure \ref{fig:mmf_power_temperatures}.
 %slika
+%\label{fig:mmf_scatters}
 %19.4.
 %2-03
-%ukljuci stokes as i temp
+%stokes i as
+
+%slika
+%\label{fig:mmf_power_temperatures}
+%19.4.
+%2-03 temp
+%01 temp
+It is clear that multi-mode fibres provide much better measurement performance, compared to single-mode fibres. Note that the same or better performance is obtained with standard multi-mode fibres, when compared to a highly non-linear single-mode fibre. Temperature inaccuracy is achieved to be 
+\begin{equation}
+\varDelta T < \SI{5}{\kelvin} \textrm{.}
+\end{equation}
+Some problems still occur at the end of the measurement region, but these are predominantly the result of poor fibre termination. \\
+
+Further measurements were made to evaluate the quality of photodetection diodes. Firstly, PIN diodes PDA10CS-EC were tested, especially with the far weaker anti-Stokes scattering signal. Different gains, and thus different bandwidths, were used to determine the best possible configuration. On the anti-Stokes channel, only the 30 dB and 40 dB options were concluded to provide reasonable measurements. The waveform deterioration on the higher-gain setting was, however, evident. On the Stokes channel, even the 20 dB gain setting was sufficient to maintain a sufficient SNR, whilst pertaining the waveform well. The only viable solution at hand was the use of the APD diode, but the implementation was delayed, so some other interim measurements were performed, with a 40 dB setting of the PIN diode amplifiers. \\
+
+The next step was adding a patch cable between the two cascaded fibres, as shown in Figure \ref{fig:mmf_second_cascade}.
+%\label{fig:mmf_second_cascade}
+The patch was 50 m in length, and was kept in full standard shielding to enable safe temperature control of the fibre. This fibre was, therefore, selected as a stretch that will be subjected to heating and cooling, in order to measure system performance with different temperatures along the line. The middle position in the system was chosen to ensure no unwanted effects from reflections against fibre ends will occur, obscuring the actual measurement result. All the three system parts were spliced together, eliminating reflections. The immediate effect is visible in scattered components. An example of a newly-measured scattering profile is given in Figure \ref{fig:mmf_patch_scatters}.
+%\label{fig:mmf_patch_scatters}
+%10.05.
+%initial.png stokes as
+The step-like behaviour in the profiles has disappeared, showing the splices to have minimum losses. \\
+
+The patch cable was now heated to \SI{50}{\celsius}. The scattered signals and temperature profile are displayed in Figure \ref{fig:first_50c}.
+%\label{fig:first_50c}
+%10.5.
+%50C.png stokes as temp ... mozda moze 48C.csv
+The temperature profile clearly and accurately shows the temperature difference between the fibre parts. Some problems are also evident. The first is the width of the temperature step. Although the patch length is 50 m, and only the patch was heated, the measured temperature shift has an apparent relaxation that \textit{runs} for about 200 effective meters. As the amplifiers for PIN diodes were set to 40 dB gain option, their bandwidth mas merely \SI{320}{\kilo \hertz}, which was considered insufficient to properly measure rapid temperature changes. Readings from discrete temperature sensor were now implemented as a calibration mechanism. Therefore, the temperature at the beginning of the calculated profile indeed corresponds to the actual room temperature, which most of the measurement fibres were in. However, due to errors in temperature calculation term, caused by the reasons already discussed in chapter \ref{ch:data_processing}, the temperature profile exhibits a constant slope. So, the absolute temperature error at the end of the measurement fibre is 
+\begin{equation}
+\varDelta T_\textrm{total} \approx \SI{15}{\kelvin} \textrm{.}
+\end{equation}
+
+%8.6. smo kalibrirali i korstili apd diodu
+%pin diodu smo spustili na 20db
+%usporedi snr dvaju kanala
+
+% usporedili smo rezultate sa razlicitim trajanjima impulsa
+
+%konacna mjerenja s vrucom i hladnom vodom
+
 
 
 % --------------------------------------
