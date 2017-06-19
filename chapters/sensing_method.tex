@@ -61,9 +61,9 @@ P_R(z) = P_0 \, S \, \alpha_R(z) \, \exp\left(-2 \alpha z\right) \, W \textrm{.}
 \end{equation}
 A number of important terms from this equation should be discussed. Firstly, note the coefficient 2 in the exponential attenuation term. This emphasises that the observed optical signal has travelled twice the distance to the observed point; The first time from the laser source, before the scattering, and again while returning back to the observer. The term $W$ represents the OTDR spatial resolution element. It arose from integrating equation \ref{eq:otdr_beer}, as a fibre segment of length $W$ represents the shortest independent element the OTDR method can differentiate. The length of the resolution element is dependant on the excitation pulse length $T_0$, and can be found as
 \begin{equation} \label{eq:otdr_resolution}
-W = \frac{c}{n_g} T_0 \approx \frac{c}{n_1} T_0 \textrm{.}
+W = \frac{c}{n_g} T_0 \approx \frac{c}{n_1} T_0 \textrm{,}
 \end{equation}
-It is clear that this term will present a trade-off in system implementation, as it directly determines both the spatial resolution, as well as the optical power received at the detector monitoring the backscattering. The final term $S$ is the percentage of scattered optical power \textit{caught} within the numerical aperture of the fibre, enabling the signal to travel back to the originating end. For a step-index fibre, it is given as
+where the approximation assumes the observed fibre mode is well-confined. It is clear that this term will present a trade-off in system implementation, as it directly determines both the spatial resolution, as well as the optical power received at the detector monitoring the backscattering. The final term $S$ is the percentage of scattered optical power \textit{caught} within the numerical aperture of the fibre, enabling the signal to travel back to the originating end. For a step-index fibre, it is given as
 \begin{equation}
 S = \frac{\textrm{fibre acceptance angle}}{\textrm{total solid angle}} = \frac{\pi \cdot \textrm{NA}^2}{4 \pi \cdot n_g^2} \approx \frac{\textrm{NA}^2}{4n_1^2} \textrm{.}
 \end{equation}
