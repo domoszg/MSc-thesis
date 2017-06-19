@@ -140,19 +140,40 @@ The patch cable was now heated to \SI{50}{\celsius}. The scattered signals and t
 %\label{fig:first_50c}
 %10.5.
 %50C.png stokes as temp ... mozda moze 48C.csv
-The temperature profile clearly and accurately shows the temperature difference between the fibre parts. Some problems are also evident. The first is the width of the temperature step. Although the patch length is 50 m, and only the patch was heated, the measured temperature shift has an apparent relaxation that \textit{runs} for about 200 effective meters. As the amplifiers for PIN diodes were set to 40 dB gain option, their bandwidth mas merely \SI{320}{\kilo \hertz}, which was considered insufficient to properly measure rapid temperature changes. Readings from discrete temperature sensor were now implemented as a calibration mechanism. Therefore, the temperature at the beginning of the calculated profile indeed corresponds to the actual room temperature, which most of the measurement fibres were in. However, due to errors in temperature calculation term, caused by the reasons already discussed in chapter \ref{ch:data_processing}, the temperature profile exhibits a constant slope. So, the absolute temperature error at the end of the measurement fibre is 
+The temperature profile clearly and accurately shows the temperature difference between the fibre parts. Some problems are also evident. The first is the width of the temperature step. Although the patch length is 50 m, and only the patch was heated, the measured temperature shift has an apparent relaxation that \textit{runs} for about 200 effective meters. As the amplifiers for PIN diodes were set to the 40 dB gain option, their bandwidth was mere \SI{320}{\kilo \hertz}, which was considered insufficient to properly measure rapid temperature changes. Readings from discrete temperature sensor were now implemented as a calibration mechanism. Therefore, the temperature at the beginning of the calculated profile indeed corresponds to the actual room temperature, which most of the measurement fibres were in. However, due to errors in temperature calculation term, caused by the reasons already discussed in chapter \ref{ch:data_processing}, the temperature profile exhibits a constant slope. So, the absolute temperature error at the end of the measurement fibre is 
 \begin{equation}
 \varDelta T_\textrm{total} \approx \SI{15}{\kelvin} \textrm{.}
 \end{equation}
+PIN diodes were thus identified as the limiting component of the current measurement system. Therefore, a more sensitive component had to be implemented, especially on the anti-Stokes channel.
 
-%8.6. smo kalibrirali i korstili apd diodu
-%pin diodu smo spustili na 20db
-%usporedi snr dvaju kanala
+The next step was, therefore, implementing an APD-based photodetector on the anti-Stokes channel. The model used was APD130C by Thorlabs. Its characteristic were presented in chapter \ref{ch:setup}. The diode is declared to have very low noise, high responsivity and large bandwidth, making it ideal for monitoring weak anti-Stokes scattered signals. The manufacturer indicated the possible problems that may occur, as the detector size is only 0.2 mm in diameter \cite{datasheet:apd130c}. The light from the fibre tip is expected to diverge, leading to high coupling losses, especially in multi-mode applications. Some adaptation to the stock photodetector had to be made. An additional fibre collimator, aspheric focusing lens, as well as mechanical mounting devices were obtained from Thorlabs to ensure maximum light-coupling from the fibre to the photodetector. The schematic view of the optical setup at the photodetector is presented in Figure \ref{fig:apd_optics}.
+%\label{fig:apd_optics}
+The photodetector was then connected to a constant-wave optical source, and the additional optical components mechanically aligned, so that maximum detected power was measured. In this process, the same multi-mode fibres were used, as those used in actual anti-Stokes measurement scenario. \\
 
-% usporedili smo rezultate sa razlicitim trajanjima impulsa
+After calibrating the APD diode, the PIN-based photodetector monitoring the Stokes scattering was configured to the 20 dB gain option, in order to increase the bandwidth. A new measurement was made at room temperature. Additionally, a coreless termination fibre was spliced to the end of the measurement cascade. The termination fibre reduced reflection off the system end, and the spikes at the end of scattering profiles were almost completely reduced. The measurement is displayed in Figure \ref{fig:apd_scattering}.
+%\label{fig:apd_scattering}
+%12.06
+%Scatterings
+At this point, the anti-Stokes measurement exhibits even better SNR than the Stokes measurement. This is due to a relatively low gain on the PIN diode-side. Nevertheless, this configuration has been selected so as not to lose the large bandwidth enabled by the APD diode. The low-bandwidth limitation of the PIN diode was still visible after heating the patch fibre to about \SI{60}{\celsius} and inspecting the measurement shown in Figure \ref{fig:apd_60c}.
+%\label{fig:apd_60c}
+%12.06.
+%61C-zoom. sve komponente
+The Stokes profile still features a relaxation after the step, and the resulting temperature profile has a subsequent error at the beginning and the end of the patch. It is, therefore, concluded that a high-bandwidth APD diode is an advisable option for the Stokes channel, as well. Nevertheless, the achieved measurement performance was satisfactory. The final measurement inaccuracy was
+\begin{equation}
+\varDelta T \approx \SI{5}{\kelvin} \textrm{,}
+\end{equation}
+which proved the validity of using a multi-mode fibre for this application. \\
 
-%konacna mjerenja s vrucom i hladnom vodom
+For the final approval of the selected configuration, a measurement sweep at different temperature was made by using different laser pulse widths. The measured temperature was \SI{60}{\celsius} for the three widths presented in Figure \ref{fig:width_sweep_60c}.
+%\label{fig:width_sweep_60c}
+%13.06
+% samo temp
+It is clear that the spatial resolution differs for the three cases, but the overall performance does not change significantly. \\
 
+The final set of graphs in Figure \ref{fig:final_measurements} presents measurements for different high and low temperatures.
+%\label{fig:final_measurements}
+%Dva topla
+%Dva hladna
 
 
 % --------------------------------------
