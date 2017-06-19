@@ -9,23 +9,98 @@
 
 % --------------------------------------
 
-The distributed sensing method described in this thesis is based on the optical time-domain refractometry (abbr. OTDR) method. In its elementary form, OTDR is used for characterizing an optical fibre or an optical link along its length. The effect enabling this kind of measurement is the backscattered Rayleigh signal. After sending an optical signal along the fibre, Rayleigh scattering will occur at each point in the fibre. A part of the produced scattered signal will propagate in the backward direction, which enables capturing of the scattering at the same fibre end that the optical signal was sent from. The received signal can be decoupled and observed by a photodiode connected to an oscilloscope. The oscilloscope will be triggered by the initial optical pulse, which can be delivered from the optical source itself. By applying the relation 
-\begin{equation} \label{eq:otdr_time_distance}
-z_0 = \frac{c}{n_\textrm{eff}} \cdot \frac{t_0}{2}
+Optical fibres can be used to measure a variety of physical quantities, utilizing otherwise (i.e. in communication systems) unwanted optical effects that may occur within. Depending on the sensing method, the obtained results can either be spatially-discrete, if the measurement was localized to a specific point in space, or distributed, if the measurement method yields a profile showing the value of the observed physical quantity in every point of the one-dimensional span of the measurement fibre. Some other sources categorize optical sensors depending on the modulation localization, thus distinguishing intrinsic sensors -- if the modulation occurs within the fibre -- and extrinsic sensors, with an external transducer of the physical quantity. Furthermore, sensors can be categorized depending on the observed optical phenomena:
+\begin{description}
+	\item[Phase-modulated] -- The detected signal is usually compared with a reference by interferometric methods.
+	\item[Intensity-modulated] -- A form of amplitude modulation by an optical effect.
+	\item[Wavelength-modulated] -- A perturbation in the parameter of interest changes physical characteristics of the fibre, inducing a non-linear effect.
+	\item[Scattering-based] -- An Optical time-domain interferometer (abbr. OTDR) monitors a backscattered signal produced as a result of intrinsic optical effects.
+	\item[Polarization-based] -- Ahe perturbations in the parameter of interest changes the polarization of an incident signal, and causes the formation of cross-polarized elements.
+\end{description}
+Another feature of some fibre-optical sensors is the requirement of reaching the sensing element only from the one side, as opposed to connecting the sensing element at both ends. This is primarily a feature of scattering-based sensors, as only back-scattered signal may be sufficient for determining the required information. Generally, a distributed sensor can function in quasi-distributed -- as shown in Figure \ref{fig:quasi_distributed} -- or distributed configuration.
+%\label{fig:quasi_distributed}
+%Alan Roger 1999
+In a quasi-distributed configuration, couplers are placed at discrete points along the measurement fibre, and terminated in the coupled branch by a totally-reflective device. The measured reflectance can then be time-demultiplexed in order to obtain measurements at multiple discrete points along the fibre. On the other hand, a fully-distributed configuration uses scattering effects within the fibre, and measures the backscattered signal, providing a continuous profile of the measured quantity. The achieved measurement method is the optical time-domain refractometry (abbr. OTDR).\\
+
+\section{Optical time-domain reflectometry}
+
+In its elementary form, OTDR is used for characterizing an optical fibre or an optical link along its length. The effect enabling this kind of measurement is the backscattered Rayleigh signal. A block diagram of an OTDR system is shown in Figure \ref{fig:otdr_block}.
+%\label{fig:otdr_block}
+%Uobicajeni dijagram ili onaj iz Rogers 1999
+A laser is placed at the beginning of the measurement fibre, and its optical output coupled to it through a circulator. The measurement fibre is then excited by a laser pulse with an optical signal of power $P_0$, and a pulse width $T_0$. As the pulse propagates along the fibre, it will suffer losses determined by the attenuation coefficient $\alpha$. As discussed in chapter \ref{ch:fibres}, a fundamental loss mechanism is Rayleigh scattering. Therefore, it is convenient to represent $\alpha$ as a sum
+\begin{equation}
+\alpha = \alpha_R + \alpha_a \textrm{,}
 \end{equation}
-that connects the elapsed time, as shown by the oscilloscope, with the propagated distance, one can use the x-axis of the oscilloscope as an indication as to where along the length of the fibre the scattering observed on the y-axis took place. The resulting image is, thus, the fibre profile along its length. A sample measurement is shown in Figure \ref{fig:otdr_sample}.
+where $\alpha_R$ is the contribution of Rayleigh scattering to total losses. Rayleigh scattering occurs as a result of microscopic fluctuations in density, leading to small perturbations in refractive index. The scattering cross-section is largely dependent on wavelength, so $\alpha_R$ can be expressed as
+\begin{equation}
+\alpha_R = \frac{C}{\lambda^4} \textrm{.}
+\end{equation}
+Here, $C$ is a fibre-dependent constant, ranging around
+\begin{equation}
+C \in \left[ 0.7, 0.9 \right]\, \SI{}{(\decibel / \kilo \meter) \, \micro \meter ^4} \textrm{,}
+\end{equation}
+producing a Rayleigh-limited attenuation coefficient around 
+\begin{equation}
+\alpha_R \in \left[0.12, 0.16\right] \, \SI{}{\decibel / \kilo \meter}
+\end{equation}
+at the wavelength of 1.55 \textmu m. The attenuation of optical power, as the light propagates through a medium, is governed by the Beer's law as
+\begin{equation}
+\frac{dP}{dz} = -\alpha P \textrm{.}
+\end{equation}
+If an optical pulse of power $P_0$ is sent along the fibre, the optical power at point $z$ can be expressed as
+\begin{equation}
+P(z) = P_0 \exp\left(-\alpha \, z\right) \textrm{,}
+\end{equation}
+when $alpha$ is expressed in nepers per metre. The power of the Rayleigh-reflected optical signal, backscattered from the point $z$ to the origin of the optical excitation pulse is expressed by a differential term
+\begin{equation} \label{eq:otdr_beer}
+dP_R(z) = P_0 \, S \, \alpha_R(z) \, \exp\{ -2 \int_{0}^{z} \alpha(x) dx \} \, dz \textrm{.}
+\end{equation}
+Integrating the term, we arrive at
+\begin{equation} \label{eq:otdr_power}
+P_R(z) = P_0 \, S \, \alpha_R(z) \, \exp\left(-2 \alpha z\right) \, W \textrm{.}
+\end{equation}
+A number of important terms from this equation should be discussed. Firstly, note the coefficient 2 in the exponential attenuation term. This emphasises that the observed optical signal has travelled twice the distance to the observed point; The first time from the laser source, before the scattering, and again while returning back to the observer. The term $W$ represents the OTDR spatial resolution element. It arose from integrating equation \ref{eq:otdr_beer}, as a fibre segment of length $W$ represents the shortest independent element the OTDR method can differentiate. The length of the resolution element is dependant on the excitation pulse length $T_0$, and can be found as
+\begin{equation} \label{eq:otdr_resolution}
+W = \frac{c}{n_g} T_0 \approx \frac{c}{n_1} T_0 \textrm{.}
+\end{equation}
+It is clear that this term will present a trade-off in system implementation, as it directly determines both the spatial resolution, as well as the optical power received at the detector monitoring the backscattering. The final term $S$ is the percentage of scattered optical power \textit{caught} within the numerical aperture of the fibre, enabling the signal to travel back to the originating end. For a step-index fibre, it is given as
+\begin{equation}
+S = \frac{\textrm{fibre acceptance angle}}{\textrm{total solid angle}} = \frac{\pi \cdot \textrm{NA}^2}{4 \pi \cdot n_g^2} \approx \frac{\textrm{NA}^2}{4n_1^2} \textrm{.}
+\end{equation}
+For a gradient-index fibre, the expression can be modified as
+\begin{equation}
+S' = \frac{2}{3} S \textrm{.}
+\end{equation}
+Usually, expression \ref{eq:otdr_power} is simplified by defining a spreading factor
+\begin{equation}
+\sigma = -10 \log \left( \alpha_R \, S \, W \right) \textrm{,}
+\end{equation}
+and obtaining a logarithmic expression
+\begin{equation}
+P_R(z) \,\textrm{[dBm]} = P_0 \,\textrm{[dBm]} - \sigma - 2\alpha L \textrm{,}
+\end{equation}
+where $\alpha$ is expressed in decibels per kilometre. \\
+
+The scattered signal, once propagated to the beginning of the measurement fibre, can now be decoupled and observed by a photodiode connected to an oscilloscope. The oscilloscope will be triggered by the initial optical pulse, which can be delivered from the optical source itself. By applying the relation 
+\begin{equation} \label{eq:otdr_time_distance}
+z_0 = \frac{c}{n_\textrm{g}} \cdot \frac{T_0}{2}
+\end{equation}
+that connects the elapsed time, as shown by the oscilloscope, with the propagated distance, one can use the x-axis of the oscilloscope as an indication as to where along the length of the fibre the scattering observed on the y-axis took place. The resulting image is, thus, the fibre profile along its length. A sample OTDR measurement is shown in Figure \ref{fig:otdr_sample}.
 %%% FIGURE
 %\label{fig:otdr_sample}
-The loss introduced by Rayleigh scattering is manifested by a slope in the measured profile. Fibre attenuation can be easily retrieved by determining the slope. Other anomalies of the fibre can be observed, such as splicing and connector losses, reflections off fibre ends, etc. 
-% rezolucija i impuls
-%\label{eq:otdr_resolution}
-\\
+The loss introduced by Rayleigh scattering is manifested by a slope in the measured profile. Fibre attenuation can be easily retrieved by determining the slope. Other anomalies of the fibre can be observed, such as splicing and connector losses, reflections off fibre ends, etc. All the losses at different points in the measured fibre can be numerically measured on the oscilloscope screen.\\
+
+
+% Nova sekcija
 
 The described OTDR method can be applied for measuring other effects occurring in fibres. For distributed temperature sensing, one can either observe Brillioun or Raman scattering. Brillioun scattering produces a relatively narrow-band frequency shift. The information on temperature is extrapolated from the value of the frequency shift. Therefore, a Brillioun scattering-based system operates by monitoring the optical spectrum. Raman scattering, on the other hand, produces a far larger frequency shift. The produced frequency-shifted components can be easily filtered by means of an optical filter. Information on temperature is obtained by monitoring the optical intensity of shifted signals. Therefore, a Raman scattering-based system utilizes simpler equipment and measurement method. 
 
 
 %\label{eq:stokes_temperature}
 
+
+
+The implemented system is a distributed fibre-optical sensor, built to be accessed only from the one side.
 
 % --------------------------------------
 
