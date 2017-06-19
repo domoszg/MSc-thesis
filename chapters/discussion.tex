@@ -32,7 +32,19 @@ H(j\omega) = \frac{Y(j\omega)}{L(j\omega)} \textrm{.}
 \end{equation}
 The impulse response was then calculated as the inverse FFT and convoluted by $s(t)$ with $T$ corresponding to the configured laser pulse width. The procedure, however, required very large memory resources, and was questioned to have large influence on the final measurement, when compared to the photodetectors' bandwidth issues. Therefore, after some tests that proved no significant difference would be made, the correction was concluded to be unnecessary, and scrapped. \\
 
+The limitations the data acquisition rate, considering the rate of data transfer between the DAQ card and the acquisition software, and not the sampling rate itself, have already been emphasised in chapter \ref{ch:results}. Better acquisition mechanism should be implemented. The first suggestion is to abandon the use of Express VIs, which may be poorly optimized, in favour of a user-friendly configuration interface. The full potential of the DAQ card should be employed. \\
 
+Still addressing the acquisition repetition rate, some methods employing pulse coding and laser modulation have been suggested. Papers addressing this method suggest repeating the excitation pulse in a short time-period, causing an \textit{overlap} between the optical pulses and their backscatterings within the measurement fibres. An example of such a method is modulating the laser with an amplitude-shift-keyed (abbr. ASK) message to obtain an effective convolution of the backscattered signals, as
+\begin{equation}
+y(t) = \sum_{i = 0}^{N-1} a_i x(t - iT) \textrm{,}
+\end{equation}
+where $x(t)$ is a single-pulsed response, and $y(t)$ the total response. The resulting signal could be numerically processed to obtain $x(t)$ with a coding gain that can be obtained as a ration of standard deviations of $y(t)$ and $x(t)$, as
+\begin{equation}
+C_\textrm{gain} = \frac{\sigma_Y}{\sigma_X} = \frac{N+1}{2 \sqrt{N}} \textrm{.}
+\end{equation}
+The laser is capable of receiving an external trigger in the range of 100 Hz -- 1 MHz. Additionally, the National Instruments PXIe-1082-based system had no fast digital outputs at the time of considering this method. Therefore, the implementation of this method would yield a very small coding gain, due to the bitrate limit of the ASK-coded message. \\
+
+The next logical step towards improving the SNR of the measurement system is implementing and APD-based photodetector on the Stokes channel, as well the anti-Stokes channel. The SNR improvement after implementing the first diode was evident, and a very large bandwidth was even able to visibly compensate for the insufficiencies on the Stokes channel. Large bandwidth is desirable to be able to certainly detect any kinds of temperature changes, especially those occurring in a short length-span.
 
 % --------------------------------------
 
