@@ -69,7 +69,7 @@ Although these detectors are able to provide large gains, which are needed to mo
 \end{equation}
 Although APD diodes normally exhibit larger noise in comparison to PIN diodes, this particular model provides very low noise powers, as well as inherent high gain and very large bandwidth. Therefore, in the final stage of this project, APD diode was installed to detect the anti-Stokes signal, as it has proved critical due to its low amplitude and high temperature-dependence. Additional optical components were secured to ensure proper coupling of the entire anti-Stokes signal power to the APD photodetector. These include an extra collimator, focusing lens, and precision mechanical focusing components. The Rayleigh scattering component was not monitored in this setup. \\
 
-Photodetectors have a BNC connector at their output. This enables them to operate under a matched 50 \textOmega or a high-impedance load. The transimpedance gain presented in table \ref{table:photodetectors} is the gain achieved with the high-impedance load on the photodetector's output, as was the case in this laboratory setup. All the photodetectors' output were monitored by a DAQ device PXIe-5160 from National Instruments. The device is a 10-bit analog-to-digital converter, its highest input frequency being
+Photodetectors have a BNC connector at their output. This enables them to operate under a matched 50 \textOmega or a high-impedance load. The transimpedance gain presented in table \ref{table:photodetectors} is the gain achieved with the high-impedance load on the photodetector's output, as was the case in this laboratory setup. All the photodetectors' output were monitored by a DAQ device PXIe-5160 from National Instruments. The device is a 10-bit analog-to-digital converter (abbr. ADC), its highest input frequency being
 \begin{equation}
 f_\textrm{max} = \SI{500}{\mega \hertz} \textrm{,}
 \end{equation}
@@ -81,7 +81,15 @@ The sampling rate is
 \begin{equation}
 f_\textrm{S} = \SI{1.25}{\giga S / \second} \textrm{,}
 \end{equation}
-which ensures a faithful representation of the signal detected by the photodetector. The PXIe-5160 has an extension card form-factor, and is hosted by a National Instruments PXIe-1082 chassis. The system controller is also present in one of the chassis's slots. The extension card is declared to have a warm-up time of 15 minutes. Two channels, CH2 and CH3, of the DAQ device are used to monitor the Stokes and anti-Stokes signal, respectively. To the channel CH4, the output signal from an Analog Devices TMP36 calibrated temperature sensor is connected. This device is used to calibrate the temperature offset of the system, by determining the temperature at the beginning of the measurement fibre. The TMP36 is soldered onto a coaxial, and a USB cable in parallel. This enables power supply from the system controller's USB hub. The current temperature of the TMP36 can be calculated as \cite{datasheet:tmp36}
+which ensures a faithful representation of the signal detected by the photodetector. The input voltage range was set to
+\begin{equation}
+V_\textrm{pk-pk} = \SI{50}{\milli \volt} \textrm{.}
+\end{equation}
+With a 10-bit ADC, the quantization step is
+\begin{equation}
+q \approx \SI{97.7}{\micro \volt} \textrm{.}
+\end{equation}
+It will be shown that this will be sufficiently small when measuring the scattered signals to disregard the quantization noise of the ADC. The PXIe-5160 has an extension card form-factor, and is hosted by a National Instruments PXIe-1082 chassis. The system controller is also present in one of the chassis's slots. The extension card is declared to have a warm-up time of 15 minutes. Two channels, CH2 and CH3, of the DAQ device are used to monitor the Stokes and anti-Stokes signal, respectively. To the channel CH4, the output signal from an Analog Devices TMP36 calibrated temperature sensor is connected. This device is used to calibrate the temperature offset of the system, by determining the temperature at the beginning of the measurement fibre. The TMP36 is soldered onto a coaxial, and a USB cable in parallel. This enables power supply from the system controller's USB hub. The current temperature of the TMP36 can be calculated as \cite{datasheet:tmp36}
 \begin{equation}
 T \, \textrm{[\textdegree C]} = \left( V \, \textrm{[mV]} - V_\textrm{n} \right) \cdot 0.1 \, \textrm{[\textdegree C / mV]} + 25 \, \textrm{\textdegree C}
 \end{equation}
