@@ -1,0 +1,42 @@
+\documentclass{standalone}
+\usepackage{diplomski}
+
+\begin{document}
+
+\chapter{Discussion and enhancements}
+\pagenumbering{arabic}
+\setcounter{page}\thestranica
+
+% --------------------------------------
+
+The implemented system produced a fine temperature and spatial resolution. Some issues that were discussed could be mitigated by hardware or software enhancements. Firstly, measurement fibres should be properly terminated, and the use of opto-mechanical connectors reduced. The connectors, especially those of FC-type, have demonstrated large reflections, that can even induce the occurrence of SRS at high optical powers. Therefore, splicing of all fibre sections is recommended. This yields very small insertion losses, as was evident by the results represented in chapter \ref{ch:results}. \\
+
+The used laser source proved to be sufficient in obtaining good measurement results in this system. It was, however, noted that the laser did not feature any power control, and that the once configured power levels were unrepeatable and unstable during a measurement period. This phenomenon has little effect on the measurement performance, as the Stokes and anti-Stokes signal, both influenced by the incident optical power change, are divided in the numerical process. As long as the fibre remains in the spontaneous Raman-regime, the laser instability will be negligible. The laser pulse was, however, noted to be of irregular shape, having two significant peaks, as presented in Figure \ref{fig:laser_waveform}.
+%\label{fig:laser_waveform}
+%14.06.
+% csv bilo koji
+The theoretical background assumes a step-like optical excitation of the measurement fibre. Therefore, an excitation by any other waveform will in fact produce a convolution of the impulse waveform $l(t)$ with the system impulse response $h(t)$, as
+\begin{equation}
+y(t) = l(t) \ast h(t) \textrm{.}
+\end{equation}
+In situations where the laser pulse is extremely malformed, it is advisable to perform deconvolution an re-convolution with a numerical step excitation
+\begin{equation}
+s(t) = \mu(t) - \mu(t-T) \textrm{,}
+\end{equation}, as follows
+\begin{equation}
+r(t) = s(t) \ast h(t) \textrm{.}
+\end{equation}
+Here, $s(t)$ is taken as a step signal, whose length $T$ is determined by the desired spatial resolution. Signal $r(t)$ is the step-response of the fibre measurement system. The impulse response $h(t)$ can be found by some of the deconvolution algorithms. Here, a Fast-Fourier-transform-based (abbr. FFT) algorithm was used to apply the suggested procedure and determine the effect of the irregular laser pulse. The transfer function $H(j\omega)$ of the measurement fibres was found as a ratio of Fourier transforms of the measured laser pulse and the response
+\begin{equation}
+H(j\omega) = \frac{Y(j\omega)}{L(j\omega)} \textrm{.}
+\end{equation}
+The impulse response was then calculated as the inverse FFT and convoluted by $s(t)$ with $T$ corresponding to the configured laser pulse width. The procedure, however, required very large memory resources, and was questioned to have large influence on the final measurement, when compared to the photodetectors' bandwidth issues. Therefore, after some tests that proved no significant difference would be made, the correction was concluded to be unnecessary, and scrapped. \\
+
+
+
+% --------------------------------------
+
+\setcounter{stranica}{\thepage}
+\addtocounter{stranica}{1}
+
+\end{document}
