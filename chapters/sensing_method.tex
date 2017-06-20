@@ -94,7 +94,7 @@ The loss introduced by Rayleigh scattering is manifested by a slope in the measu
 
 
 
-% Differential anti-Stokes Raman thermometry
+% Differential anti-Stokes Raman thermometry DART
 
 % Objasniti pristup u vremenskoj domeni -- formule
 % Objasniti pristup u frekvencijskoj domeni
@@ -104,8 +104,22 @@ The loss introduced by Rayleigh scattering is manifested by a slope in the measu
 The described OTDR method can be applied for measuring other effects occurring in fibres. For distributed temperature sensing, one can either observe Brillioun or Raman scattering. Brillioun scattering produces a relatively narrow-band frequency shift. The information on temperature is extrapolated from the value of the frequency shift. Therefore, a Brillioun scattering-based system operates by monitoring the optical spectrum. Raman scattering, on the other hand, produces a far larger frequency shift. The produced frequency-shifted components can be easily filtered by means of an optical filter. Information on temperature is obtained by monitoring the optical intensity of shifted signals. Therefore, a Raman scattering-based system utilizes simpler equipment and measurement method. 
 
 
-%\label{eq:stokes_temperature}
 
+
+
+
+% Oko ramana
+
+As described in chapter \ref{ch:fibres}, Raman effect also produces Stokes and anti-Stokes-shifted scattered signals. The powers of these scattered signals are temperature-dependent, following Bose-Einstein distributions in equations \ref{eq:be-s} and \ref{eq:be-as}. The theoretical background enables measurement of only one of the scattered components, and calculating the absolute temperature from one of the signals. This requires precise knowledge of the parameters in \ref{eq:be-s} or \ref{eq:be-as} to ensure precise results. The resulting system would be material dependent and difficult to calibrate. \\
+
+It can be noted that the two terms are largely equal, except for the Bose-Einstein distribution terms, and the terms involving scattering wavelengths. The Differential anti-Stokes Raman thermometry method (abbr. DART) relies on measuring both Stokes and anti-Stokes scattering components, and finding the ratio of their powers numerically. The ratio of powers measured at point $z_0$ can be expressed as
+\begin{equation}
+R(T) = \frac{P_{AS}(z_0)}{P_S(z_0)} = \left( \frac{\lambda_S}{\lambda_{AS}} \right)^4 \exp\left( - \frac{\varDelta E}{k T} + \varDelta \alpha_P \, z_0 \right) \textrm{.}
+\end{equation}
+
+
+
+%\label{eq:stokes_temperature}
 
 
 The implemented system is a distributed fibre-optical sensor, built to be accessed only from the one side.

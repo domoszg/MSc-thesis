@@ -39,7 +39,7 @@ The three most important non-linear effects in optical fibres are described here
 
 In distributed temperature sensing (abbr. DTS) systems, either of the two non-linear effects can be effectively used. The first is the Brillouin effect. This effect is a result of the electrostriction phenomenon, i.e. the compression of the material in the presence of an electromagnetic field. The optical pulse functions as a pump, exciting molecules in the fibre from the ground state into a higher, virtual state. The decay of these states will produce a Stokes component -- with the wavelength being longer that that of the incident optical wave -- or an anti-Stokes component, with the wavelength being shorter than that of the incident optical wave. An illustration of this shift is given in Figure \ref{fig:freq_shift}. 
 %\label{fig:freq_shift}
-This shift will create an acoustic wave at frequency
+This shift will create phonons, i.e. an acoustic wave at frequency
 \begin{equation}
 \Omega = \left|k_A\right| \, v_A = 2 v_A \, \left|k_p\right| \, \sin\left(\theta / 2 \right) \textrm{,}
 \end{equation}
@@ -76,8 +76,33 @@ L_\textrm{eff} = \frac{1 - \exp\left(-\alpha \, L\right)}{\alpha} \textrm{.}
 Some methods for measuring temperature or strain by using stimulated Brillouin scattering , employing an excitation laser at each end of the measurement fibre, exist %\cite Rogers 1999
 . This, however, requires excellent source coherence, and it is also impossible to measure temperature and strain simultaneously. Such a measurement fibre could be hardly used in communication purposes in parallel. The stimulated Brillouin scattering method, also dubbed \textit{loss Brillouin OTDR}, can nevertheless prove advantageous in long-haul measurements.
 
-
 \subsection{Raman scattering}
+The other effect used in distribute temperature sensing systems is the Raman effect. This effect relies on molecular vibrations and rotations modulating the incident optical light. The same phenomemon of photon absorption and reemission occurs as in Figure \ref{fig:freq_shift}, only this time no acoustic phonons are produced, as opposed to Brillouin scattering. Therefore, Raman scattering is an isotropic process, and the scattered signals propagate in all directions. In this effect, the vibrational energy levels of the fibre structure dictate the value of Raman shift
+\begin{equation}
+\Omega_R = \omega_P - \omega_S \textrm{.}
+\end{equation}
+As in Brillioun effect, Stokes and anti-Stokes shifts are defined, with the photons produced by the former having a wavelength at frequency $\omega_S$ longer than the incident pump wavelength at frequency $\omega_P$, and those of the latter a shorter wavelength corresponding to frequency $\omega_{AS}$. The total optical power produced by the Stokes shift can be obtained from 
+\begin{equation}
+dP_S = P_0 \, \rho_S \, \Gamma_S \, dz \textrm{,}
+\end{equation}
+where $P_0$ is the incident optical pulse power, and $\Gamma_S$ the coefficient of scattering capture, dependent on the fibre's geometry and Stokes wavelength. The Bose-Einstein distribution $\rho_S$ is temperature dependent, and can be expressed as
+\begin{equation} \label{eq:be-s}
+\rho_S = \frac{1}{1- \exp\left( - \frac{\varDelta E}{k T} \right)} \textrm{.}
+\end{equation}
+The energy shift $\varDelta E$ can be expressed as
+\begin{equation}
+\varDelta E = \hbar \left( \omega_P - \omega_S \right) \textrm{.}
+\end{equation}
+A similar differential power expression can be expressed for the anti-Stokes shift, with a different term for the Bose-Einstein distribution
+\begin{equation} \label{eq:be-as}
+\rho_{AS} = \frac{\exp\left( - \frac{\varDelta E}{k T} \right)}{1 - \exp\left( - \frac{\varDelta E}{k T} \right)} \textrm{.}
+\end{equation}
+Here, $\varDelta E$ is defined as
+\begin{equation}
+\varDelta E = \hbar \left( \omega_P - \omega_AS \right) \textrm{.}
+\end{equation}
+The different distribution terms arise from the fact that the anti-Stokes radiation produces photons of larger energy than the incident pump photon. The energy difference must be provided by the excited molecule itself, and therefore the term must account for the number of molecules available in the proper vibrational state. It is now clear that both shifted components have a temperature dependence, but also that the dependence is much larger for the anti-Stokes component.
+
 % Druge frekvencije od bs
 % rs ide u svim smjerovima, bs samo u back
 
