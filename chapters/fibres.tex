@@ -32,6 +32,47 @@ Rayleigh scattering is, thus, largely dependent on wavelength. \\
 
 \section{Non-linear optical effects}
 
+\subsection{Kerr effect}
+
+\subsection{Brillouin scattering}
+
+In distributed temperature sensing (abbr. DTS) systems, either of the two non-linear effects can be effectively used. The first is the Brillouin effect. This effect is a result of the electrostriction phenomenon, i.e. the compression of the material in the presence of an electromagnetic field. The optical pulse functions as a pump, exciting molecules in the fibre from the ground state into a higher, virtual state. The decay of these states will produce a Stokes component -- with the wavelength being longer that that of the incident optical wave -- or an anti-Stokes component, with the wavelength being shorter than that of the incident optical wave. An illustration of this shift is given in Figure \ref{fig:freq_shift}. 
+%\label{fig:freq_shift}
+This shift will create an acoustic wave at frequency
+\begin{equation}
+\Omega = \left|k_A\right| \, v_A = 2 v_A \, \left|k_p\right| \, \sin\left(\theta / 2 \right) \textrm{,}
+\end{equation}
+where wave vectors $k_A = k_P - k_S$ correspond to acoustic, pump and Stokes waves, $v_A$ the acoustic velocity, and the angle $\theta$ represents the angle between the pump and the scattered waves. Note that, due to the $\sin\left(\theta / 2\right)$ expression, the produced wave will not propagate in forward direction, but will instead be maximum in backward direction. The Brillouin shift is given as
+\begin{equation}
+\nu_B = \pm \frac{\Omega_B}{2 \pi} = \pm \frac{2 n_g v_A}{\lambda_P} \textrm{.}
+\end{equation}
+For silica fibre, and a typical pump wavelength of 1.55 \textmu m, the frequency is about 
+\begin{equation}
+\nu_B = \SI{11.1}{\giga \hertz} \textrm{.}
+\end{equation}
+
+The value of the frequency shift is temperature- and strain-dependent. Typically, the Brillouin frequency shift is tied to these physical constants at rates about
+\begin{equation}
+C_{\nu\theta} = \SI{1.10}{\mega \hertz \, \kelvin^{-1}} \textrm{,}
+\end{equation}
+\begin{equation}
+C_{\nu\epsilon} = \SI{48}{\kilo \hertz \, \epsilon^{-1}} \textrm{.}
+\end{equation}
+The width of Stokes and anti-Stokes lines is typically 30--40 MHz. Monitoring the central frequencies, one can obtain the information about temperature and strain along the fibre. \\
+
+The described method will be efficient in the spontaneous Brillouin scattering regime. In this regime, the %%opisi spontano, opisi stimulirano
+
+
+\subsection{Raman scattering}
+% Druge frekvencije od bs
+% rs ide u svim smjerovima, bs samo u back
+
+
+% Mjerenje temperature
+%Brilliounova metoda - kratko
+% Ramanova metoda
+% Objasniti fenomen
+
 
 
 % Compare Raman and Brillioun
