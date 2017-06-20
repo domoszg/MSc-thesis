@@ -33,6 +33,7 @@ Rayleigh scattering is, thus, largely dependent on wavelength. \\
 \section{Non-linear optical effects}
 
 \subsection{Kerr effect}
+The three most important non-linear effects in optical fibres are described here.
 
 \subsection{Brillouin scattering}
 
@@ -60,7 +61,20 @@ C_{\nu\epsilon} = \SI{48}{\kilo \hertz \, \epsilon^{-1}} \textrm{.}
 \end{equation}
 The width of Stokes and anti-Stokes lines is typically 30--40 MHz. Monitoring the central frequencies, one can obtain the information about temperature and strain along the fibre. \\
 
-The described method will be efficient in the spontaneous Brillouin scattering regime. In this regime, the %%opisi spontano, opisi stimulirano
+The described method will be efficient in the spontaneous Brillouin scattering regime. In this regime, the scattered wave is generated spontaneously, as a result of fibre molecules being already thermally excited. Provided the incident, i.e. pump, optical power is large enough, the produced wave will beat with the pump wave, increasing the amplitude of the scattered wave. Such a phenomenon is then referred to as the stimulated Brillouin scattering (abbr. SBS). In order for the simulated scattering to take effect, the pump pulse power must be over the threshold level. This level is dependent on the Brillouin gain $g_B$, and the effective cross-section area of the fibre in question 
+\begin{equation}
+A_\textrm{eff} = \pi \, w^2 \textrm{,}
+\end{equation}
+with $w$ being the spot size. The threshold is given as
+\begin{equation}
+P_\textrm{th} \approx 21 \cdot \frac{A_\textrm{eff}}{g_B \, L_\textrm{eff}} \textrm{,}
+\end{equation}
+where $L_\textrm{eff}$ is the effective interaction length, found as
+\begin{equation}
+L_\textrm{eff} = \frac{1 - \exp\left(-\alpha \, L\right)}{\alpha} \textrm{.}
+\end{equation}
+Some methods for measuring temperature or strain by using stimulated Brillouin scattering , employing an excitation laser at each end of the measurement fibre, exist %\cite Rogers 1999
+. This, however, requires excellent source coherence, and it is also impossible to measure temperature and strain simultaneously. Such a measurement fibre could be hardly used in communication purposes in parallel. The stimulated Brillouin scattering method, also dubbed \textit{loss Brillouin OTDR}, can nevertheless prove advantageous in long-haul measurements.
 
 
 \subsection{Raman scattering}
@@ -69,16 +83,12 @@ The described method will be efficient in the spontaneous Brillouin scattering r
 
 
 % Mjerenje temperature
-%Brilliounova metoda - kratko
 % Ramanova metoda
 % Objasniti fenomen
 
 
-
-% Compare Raman and Brillioun
 % Spontaneous and stimulated
 
-%Other non-linear effects exist...
 
 % Sirokopojasnost Ramana
 
