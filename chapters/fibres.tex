@@ -96,10 +96,11 @@ Due to birefringence, two orthogonal components will interact, causing XPM with 
 \begin{eqnarray}
 \phi_x = \gamma \left(P_x + B P_y\right) L_\textrm{eff} & \phi_y = \gamma \left( P_y + B P_x \right) L_\textrm{eff} \textrm{.}
 \end{eqnarray}
-The total phase shift from SPM and XPM is given as
+The total phase shift from XPM is given as
 \begin{equation}
-\varDelta \phi_\textrm{NL} = \gamma L_\textrm{eff} \left(1 - B\right) \left(P_x - P_y\right) \textrm{.}
+\phi_\textrm{XPM} = \gamma L_\textrm{eff} \left(1 - B\right) \left(P_x - P_y\right) \textrm{.}
 \end{equation}
+For fibres with birefringence approaching $B=0$ or equal optical powers in two orthogonal components, the XPM-induced phase-shift approaches $\phi_\textrm{XPM} = 0$.
 
 For long fibres, effective interaction length can be approximated as $L_\textrm{eff} = 1/\alpha$. For communication systems, the maximum tolerable phase shift is taken as $\phi_\textrm{NL} < 0.1$. Therefore, communication systems use power levels that are not to exceed
 \begin{equation}
@@ -139,17 +140,17 @@ where $L_\textrm{eff}$ is the same as in \ref{eq:leff}. Some methods for measuri
 . This, however, requires excellent source coherence, and it is also impossible to measure temperature and strain simultaneously. Such a measurement fibre could be hardly used in communication purposes in parallel. The stimulated Brillouin scattering method, also dubbed \textit{loss Brillouin OTDR}, can nevertheless prove advantageous in long-haul measurements.
 
 \subsection{Raman scattering}
-The other effect used in distributed temperature sensing systems is the Raman effect. This effect relies on molecular vibrations and rotations modulating the incident optical light. The same phenomemon of photon absorption and reemission occurs as in Figure \ref{fig:freq_shift}, only this time no acoustic phonons are produced, as opposed to Brillouin scattering. Therefore, Raman scattering is an isotropic process, and the scattered signals propagate in all directions. In this effect, the vibrational energy levels of the fibre structure dictate the value of Raman shift
+The other effect used in distributed temperature sensing systems is the Raman effect. This effect is a result of molecular vibrations and rotations modulating the incident optical light. The same phenomemon of photon absorption and reemission occurs as in Figure \ref{fig:freq_shift}, only this time no acoustic phonons are produced, as opposed to Brillouin scattering. Therefore, Raman scattering is an isotropic process, and scattering occurs in all directions. In this effect, the vibrational energy levels of fibre structure dictate the value of Raman shift
 \begin{equation}
 \Omega_R = \omega_P - \omega_S \textrm{.}
 \end{equation}
-As in Brillioun effect, Stokes and anti-Stokes shifts are defined, with the photons produced by the former having a wavelength at frequency $\omega_S$ longer than the incident pump wavelength at frequency $\omega_P$, and those of the latter a shorter wavelength corresponding to frequency $\omega_{AS}$. The total optical power produced by the Stokes shift can be obtained from 
+As in Brillioun effect, Stokes and anti-Stokes shifts are defined, with the photons produced by the former having with the frequency $\omega_S$ -- lower than the incident pump frequency $\omega_P$ -- and those of the latter $\omega_{AS}$, higher than $\omega_P$. The total optical power produced by the Stokes shift can be obtained from 
 \begin{equation}
 dP_S = P_0 \, \rho_S \, \Gamma_S \, dz \textrm{,}
 \end{equation}
-where $P_0$ is the incident optical pulse power, and $\Gamma_S$ the coefficient of scattering capture, dependent on the fibre's geometry and Stokes wavelength. The Bose-Einstein distribution $\rho_S$ is temperature dependent, and can be expressed as
+where $P_0$ is the incident optical pulse power, and $\Gamma_S$ the coefficient of scattering capture, dependent on the fibre's geometry and Stokes wavelength. The Bose-Einstein distribution $\rho_S$ is temperature dependent as
 \begin{equation} \label{eq:be-s}
-\rho_S = \frac{1}{1- \exp\left( - \frac{\varDelta E}{k T} \right)} \textrm{.}
+\rho_S \propto \frac{1}{1- \exp\left( - \frac{\varDelta E}{k T} \right)} \textrm{.}
 \end{equation}
 The energy shift $\varDelta E$ can be expressed as
 \begin{equation}
@@ -157,7 +158,7 @@ The energy shift $\varDelta E$ can be expressed as
 \end{equation}
 A similar differential power expression can be expressed for the anti-Stokes shift, with a different term for the Bose-Einstein distribution
 \begin{equation} \label{eq:be-as}
-\rho_{AS} = \frac{\exp\left( - \frac{\varDelta E}{k T} \right)}{1 - \exp\left( - \frac{\varDelta E}{k T} \right)} \textrm{.}
+\rho_{AS} \propto \frac{\exp\left( - \frac{\varDelta E}{k T} \right)}{1 - \exp\left( - \frac{\varDelta E}{k T} \right)} \textrm{.}
 \end{equation}
 Here, $\varDelta E$ is defined as
 \begin{equation}
@@ -165,8 +166,9 @@ Here, $\varDelta E$ is defined as
 \end{equation}
 The different distribution terms arise from the fact that the anti-Stokes radiation produces photons of larger energy than the incident pump photon. The energy difference must be provided by the excited molecule itself, and therefore the term must account for the number of molecules available in the proper vibrational state. It is now clear that both shifted components have a temperature dependence, but also that the dependence is much larger for the anti-Stokes component.
 
+
+
 % Druge frekvencije od bs
-% rs ide u svim smjerovima, bs samo u back
 
 
 % Mjerenje temperature
