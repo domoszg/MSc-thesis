@@ -90,39 +90,36 @@ that connects the elapsed time, as shown by the oscilloscope, with the propagate
 %\label{fig:otdr_sample}
 The loss introduced by Rayleigh scattering is manifested by a slope in the measured profile. Fibre attenuation can be easily retrieved by determining the slope. Other anomalies on the fibre can be observed, such as splicing and connector losses, Fresnel reflections off fibre ends, etc. All the losses at different points in the measurement fibre can be numerically measured on the oscilloscope screen.\\
 
+
+\section{Optical frequency-domain reflectometry}
+
+The \textit{optical frequency-domain reflectometry} (abbr. OFDR) is sometimes referred to as the \textit{frequency-modulated continuous-wave} (abbr. FMCW) method. The two types of OFDR are the coherent and incoherent OFDR. In coherent OFDR systems, the frequency (i.e. the wavelength) of the laser source is swept linearly. The laser operated in a continuous-wave power regime. The reflected signal travels back to the source after time $2 \tau$, and is then mixed with the current laser signal by means of an electro-optic modulator. The resulting product will produce a signal at the frequency
+\begin{equation}
+f_B = f(t - 2 \tau) - f(t)
+\end{equation}
+For every $\tau$, the corresponding $f_B$ represents one point in space
+\begin{equation}
+z = v_g 2 f_B Y \textrm{,}
+\end{equation}
+where $Y$ is the frequency sweep rate. The mixing product is then acquired and subjected to FFT. The resulting signal is a profile, similar to that in the OTDR setup. In coherent OFDR, the spatial resolution is determined by the sweep rate. However, if the sweep rate is kept sufficiently low, the frequencies produced by mixing at the measurement side will be low, enabling acquisition by slower devices. \\
+
+In incoherent OFDR, the laser pulse amplitude is modulated by a sine signal. The frequency of that modulating signal is swept, instead of the wavelength of the laser itself. After the reflection, the signal arrives at the same type of an electro-optic modulator. Mixing produces a signal whose frequency is a beating between the current modulation signal and that of the signal coming from the fibre under test. Same considerations of resolution and resulting acquisition frequencies apply as in the coherent setup. \\
+
+While OFDR enables very fine spatial resolution with sources that operate in a constant-wave regime, as opposed to impulse regime in OTDR. However, problems can occur as the the strong signal, produced as a reflection against the fibre end, overlaps the observed signal. The SNR is thus degraded, notably for remote sections of the fibre under test. The peak power levels are limited by SRS threshold levels. However, in OTDR, the interaction of pump power with the scattered signal occurs along a small length of the fibre. In OFDR, the interaction is stronger, as all the signals are continuously powered. Furthermore, in OFDR the threshold will be dependent on the modulation frequency. The final effect is a notable amplitude modulation in the Stokes signal. Furthermore, the electronics operating at intermediate frequencies, measuring the reflected signal, are required to be highly-linear. This applies to laser electronics, as well, in addition to the requirement on the laser to have stable optical power level. For compensation of the deficiencies of electronics, a control channel can be introduced to serve as a continuous reference.
+
 \section{Temperature sensing methods}
 
+The described OTDR method can be applied for measuring other effects occurring in fibres. For distributed temperature sensing, one can either observe Brillioun or Raman scattering. As Brillioun scattering produces a relatively narrow-band frequency shift, it can be monitored by radio-frequency electronics. Raman scattering, on the other hand, produces a far larger frequency shift, whose components can be easily filtered by means of an optical filter. Information on temperature is obtained by monitoring the optical intensity of shifted signals. Therefore, a Raman scattering-based system utilizes simpler equipment and measurement method. \\
 
-
-% Differential anti-Stokes Raman thermometry DART
-
-% Objasniti pristup u vremenskoj domeni -- formule
-% Objasniti pristup u frekvencijskoj domeni
-
-% Diskusija o trima metodama
-
-The described OTDR method can be applied for measuring other effects occurring in fibres. For distributed temperature sensing, one can either observe Brillioun or Raman scattering. Brillioun scattering produces a relatively narrow-band frequency shift. The information on temperature is extrapolated from the value of the frequency shift. Therefore, a Brillioun scattering-based system operates by monitoring the optical spectrum. Raman scattering, on the other hand, produces a far larger frequency shift. The produced frequency-shifted components can be easily filtered by means of an optical filter. Information on temperature is obtained by monitoring the optical intensity of shifted signals. Therefore, a Raman scattering-based system utilizes simpler equipment and measurement method. 
-
-
-
-
-
-
-% Oko ramana
-
-As described in chapter \ref{ch:fibres}, Raman effect also produces Stokes and anti-Stokes-shifted scattered signals. The powers of these scattered signals are temperature-dependent, following Bose-Einstein distributions in equations \ref{eq:be-s} and \ref{eq:be-as}. The theoretical background enables measurement of only one of the scattered components, and calculating the absolute temperature from one of the signals. This requires precise knowledge of the parameters in \ref{eq:be-s} or \ref{eq:be-as} to ensure precise results. The resulting system would be material dependent and difficult to calibrate. \\
-
-It can be noted that the two terms are largely equal, except for the Bose-Einstein distribution terms, and the terms involving scattering wavelengths. The Differential anti-Stokes Raman thermometry method (abbr. DART) relies on measuring both Stokes and anti-Stokes scattering components, and finding the ratio of their powers numerically. The ratio of powers measured at point $z_0$ can be expressed as
+Chapter \ref{ch:fibres} identifies Stokes and anti-Stokes-shifted scattered signals produced by Raman effect. The powers of these scattered signals are temperature-dependent, following Bose-Einstein distributions in equations \ref{eq:be-s} and \ref{eq:be-as}. The theoretical background enables measurement of only one of the scattered components, and calculating the absolute temperature from one of the signals. This requires precise knowledge of the parameters in \ref{eq:raman_beer} to ensure precise results. The resulting system would be material dependent and difficult to calibrate. It can be noted that the two terms are largely equal, except for the Bose-Einstein distribution terms, and the terms involving scattering wavelengths. The \textit{Differential anti-Stokes Raman thermometry} method (abbr. DART) relies on measuring both Stokes and anti-Stokes scattering components, and finding the ratio of their powers numerically. Measured at point $z_0$, the ratio can be expressed as
 \begin{equation}
-R(T) = \frac{P_{AS}(z_0)}{P_S(z_0)} = \left( \frac{\lambda_S}{\lambda_{AS}} \right)^4 \exp\left( - \frac{\varDelta E}{k T} + \varDelta \alpha_P \, z_0 \right) \textrm{.}
+R(T) = \frac{P_{AS}(z_0)}{P_S(z_0)} = \frac{G_\textrm{AS}}{G_\textrm{S}} \left( \frac{\lambda_S}{\lambda_{AS}} \right)^4 \exp\left( - \frac{\varDelta E}{k T} + \varDelta \alpha_P \, z_0 \right) \textrm{.}
 \end{equation}
-
-
-
-%\label{eq:stokes_temperature}
-
-
-The implemented system is a distributed fibre-optical sensor, built to be accessed only from the one side.
+Terms $G_\textrm{S}$ and $G_\textrm{AS}$ are gain coefficients of the measurement chains on the Stokes and anti-Stokes channels, respectively. These include different photodiode responsivities, gains and probe attenuations. Term $\varDelta \alpha_P$ is the difference of attenuation coefficients at pump wavelength and scattered wavelengths. The characteristic of the $\alpha(\omega)$ function is assumed to be linear, and Raman spectrum generally symmetrical. Therefore, only one calculation for $\varDelta \alpha$ should be performed. Finally, temperature in kelvins at position $z_0$ is found as
+\begin{equation} \label{eq:stokes_temperature}
+T(z_0) = \frac{\varDelta E}{k \, \ln \left[ \frac{I_S}{I_{AS}} \frac{\Re_{AS}}{\Re_S} \frac{G_{AS}}{G_S} \left(\frac{\lambda_S}{\lambda_{AS}}\right)^4 \right] + \varDelta \alpha_P z_0 } \textrm{,}
+\end{equation}
+where $\Re_S$ and $\Re_{AS}$ are responsivities of photodiodes at effective Stokes and anti-Stokes wavelengths, respectively.
 
 
 % --------------------------------------

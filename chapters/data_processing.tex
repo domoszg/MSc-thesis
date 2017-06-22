@@ -59,7 +59,7 @@ An example of acquired signals before and after filtering is given in Figure \re
 
 % Objasni nagibe zasebno. Imas razlicite nagibe koji se vide i u temperaturi
 
-\section{Calculating the temperature}
+\section{Temperature calculation}
 
 The filtered Stokes and anti-Stokes profiles can be used to obtain the measurement fibre's temperature. A new LabVIEW virtual instrument was created for this purpose. It takes the measured signals as inputs, as well as some channel parameters, such as the observed wavelengths that are entered manually, ratios of gains between Stokes and anti-Stokes detection channels. The algorithm uses expression \ref{eq:stokes_temperature} to obtain the temperature. The energy shift is calculated from input parameters as
 \begin{equation}
