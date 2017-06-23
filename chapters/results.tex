@@ -9,29 +9,29 @@
 
 % --------------------------------------
 
-The laboratory setup described in chapter \ref{ch:setup} enables simple change of measurement fibres, i.e. sensing elements, as well as use of different photodetectors. Here, different sets of single-mode and multi-mode fibres were tested. Different PIN photodiodes with electrical amplifiers and APD diodes were tested, according to table \ref{table:photodiodes}. Additionally, different laser configurations and data processing algorithms were tested in the development process of the measurement system.
+The laboratory setup described in chapter \ref{ch:setup} enables simple change of measurement fibres, i.e. sensing elements, as well as use of different photodetectors. Here, different sets of single-mode and multi-mode fibres were tested. Different PIN photodiodes with electrical amplifiers and APD photodiodes were tested, according to table \ref{table:photodiodes}. Additionally, different laser configurations and data processing algorithms were tested in the development process of the measurement system.
 
 \section{Single-mode fibres}
 
 The first setup included single-mode fibres, connected in a manner displayed in Figure \ref{fig:smf_cascade}.
 %\label{fig:smf_cascade}
-On the near side of the measurement and excitation equipment, a 2.3 km-long roll of G.652-compliant single-mode fibre was connected. Its far end was spliced to a 4.2 km-long roll of highly non-linear single-mode fibre, i.e. a fibre with high $\left|\beta_3\right|$ value. Such a fibre will yield a higher non-linear response to the incident optical signal. In other words, lower power will be required to obtain the same SNR in the backscattered signal when using a highly non-linear fibre. A step in the scattered signal profile is visible, as a result of different $\left|\beta_3\right|$ coefficients, and of the reflection against SC-APC connectors between the fibres. Fibres were terminated with an FC terminator, designed to provide minimum reflection. \\
+On the near side of the measurement and excitation equipment, a 2.3 km long roll of G.652-compliant single-mode fibre was connected. Its far end was spliced to a 4.2 km long roll of highly non-linear single-mode fibre. Such a fibre will yield a higher non-linear response to the incident optical signal \cite{Hiroishi2003}. In other words, lower power will be required to obtain the same SNR in the backscattered signal when using a highly non-linear fibre. A step in the scattered signal profile is visible, as a result of different $\left|\beta_3\right|$ and $\bar{n_2}$ coefficients, and of the reflection against SC-APC connectors between the fibres. Fibres were terminated with an FC terminator, designed to provide minimum reflection. \\
 
-The first measurements were conducted with a simple data processing algorithm, which used only a classical averaging filter. Filtered Stokes and anti-Stokes reflection profiles are presented in Figure \ref{fig:classic_average_compare}, with an averaging time of 15 seconds in Figure \ref{fig:classic_average_compare_15sec} and 7 minutes in Figure \ref{fig:classic_average_compare_7min}.
+The first measurements were conducted with a simple data processing algorithm, which used only a classical averaging filter. Filtered Stokes and anti-Stokes reflection profiles are presented in Figure \ref{fig:classic_average_compare}.
 %\label{fig:classic_average_compare}
 %\label{fig:classic_average_compare_15sec}
 %\label{fig:classic_average_compare_7min}
 %30.03.
-The SNR improvement with time is evident, although further measurements did not yield any better results. The averaging filter has probably reached its best result in terms of the final SNR, while it still remains a very slow solution for filtering the signals. The next step in data processing algorithm development was the implementation of the adaptive LMS filter. A comparison of results between the two filters is given in Figure \ref{fig:classic_lms_compare}.
+The SNR improvement with time is evident, although further measurements did not yield any better results. The averaging filter has probably reached its best result in terms of the final SNR, while it still remains a very slow solution for filtering the signals. The next step in developing the data processing algorithm was the implementation of an adaptive LMS filter. A comparison of results between the two filters is given in Figure \ref{fig:classic_lms_compare}.
 %\label{fig:classic_lms_compare}
 %30.03.
-The presented results are obtained with an averaging time of 7 minutes. While the results are very comparative, certain features of the adaptive LMS algorithm need to be considered. Firstly, in the anti-Stokes graph, the adaptive LMS filter has managed to extract finer features of the scattered profile. While the SNR for the anti-Stokes profile remains roughly the same, higher spectral components that may be the result of a physically measured quantity of interest, have passed through the adaptive LMS filter. Also, it is important to note that the same SNR was achieved with the adaptive LMS filter much sooner than with the classical averaging filter. The graph presented in \ref{fig:classic_lms_compare}, displaying the data from the adaptive LMS filter, had converged to its final form in less than one minute, dramatically decreasing the required measurement time. \\
+The presented results are obtained with an averaging time of 7 minutes. While the results are very similar, certain features of the adaptive LMS algorithm need to be considered. Firstly, in the anti-Stokes graph, the adaptive LMS filter has managed to extract finer features of the scattered profile. While the SNR for the anti-Stokes profile remains roughly the same, higher spectral components that may be the result of an actual feature of the physical quantity of interest, have passed through the adaptive LMS filter. Also, it is important to note that the same SNR was achieved with the adaptive LMS filter much sooner than with the classic averaging filter. The graph presented in \ref{fig:classic_lms_compare}, displaying data from the adaptive LMS filter, had converged to its final form in less than one minute, dramatically decreasing the required measurement time. \\
 
-While still observing the scattering profiles, instead of the calculated temperature, one must estimate the maximum incident optical power that is still below the stimulated Raman scattering threshold. In all the measurements, the first laser EDFA had a constant pump power
+Whilst observing the scattering profiles, one must estimate the maximum incident optical power that is still below the stimulated Raman scattering threshold. In all measurements, the first laser EDFA had a constant pump power
 \begin{equation} \label{eq:edfa_first_pump}
 I_1 = \SI{400}{\milli \ampere} \textrm{.}
 \end{equation}
-Lower first pump power setting ensured small ASE, although this has been further filtered. The second pump power was swept, and the peak optical power measured. The qualitative rating of the waveform, as well as the measured temperature inaccuracy is presented in Table \ref{table:smf_power_sweep}.
+The lower setting of the first pump power ensured small ASE, although this has been further filtered, as described in chapter \ref{ch:setup}. The second pump power was swept, and the peak optical power measured. The qualitative rating of the waveform, as well as the estimated temperature inaccuracy is presented in Table \ref{table:smf_power_sweep}.
 \begin{table}[h]
 	\centering
 	\caption{Sweeping optical power with an SM fibre}
@@ -47,7 +47,7 @@ Lower first pump power setting ensured small ASE, although this has been further
 		1050 & 6565 & 10 & Highly expressed peak at the end of the profile
 	\end{tabular}
 \end{table}
-Pulse duration was set to 50 ns, and the measurement time was under 1 minute. A number of observations can be made here. Firstly, it can be seen that the pump power and the optical power have an irregular connection for this laser. In fact, the laser lacks power regulations, leading to the once set optical power being often unrepeatable in configuration. With some finer measurements, it was observed that a setting of
+Pulse duration was set to 50 ns, and the measurement time was under 1 minute. A number of observations can be made here. Firstly, it can be seen that the pump power and the optical power have an irregular relation for this laser. In fact, the laser lacks power regulations, so the once set optical power was often unrepeatable, in spite the same configuration. After some finer measurements, it was observed that a setting of
 \begin{equation}
 I_{2\textrm{max}} = \SI{1010}{\milli \ampere}
 \end{equation}
@@ -57,11 +57,11 @@ P_\textrm{max} = \SI{5800}{\milli \watt}
 \end{equation}
 was a repeatable maximum power setting before the effects of SRS become significant. \\
 
-Next, the laser impulse width was swept in order to determine the effect this will have to the measurement inaccuracy. It was shown that the width itself has little effect on the inaccuracy of the measured value itself. It is, however, important to ensure the laser width is long enough that the photodetectors, with their limited bandwidth, faithfully represent the impulse waveform and amplitude. The laser's pulse width can be configured in steps of 2.5 ns, and a value of
+Next, the laser impulse width was swept in order to determine the effect this will have to the measurement inaccuracy. It was shown that the width itself has little effect on the inaccuracy of the measured value itself. It is, however, important to ensure that the laser width is long enough so the photodetectors, with their limited bandwidth, faithfully represent the impulse waveform and amplitude. Laser's pulse width can be configured in steps of 2.5 ns, and a value of
 \begin{equation}
 T_{0\textrm{min}} = \SI{12.5}{\nano \second}
 \end{equation}
-was determined as the minimal required pulse width. Shorter pulse width provides a finer spatial resolution, according to \ref{eq:otdr_resolution}. Although, due to the filtering nature of the decimation procedure performed on the calculated temperature profile, selecting a lower resolution will in fact yield a \textit{smoother} temperature profile. This is further discussed in the multi-mode scenario, where more comparative measurements were made. For many future measurements, a pulse width of
+was determined as the minimal required pulse width. In principle, shorter pulse width provides a finer spatial resolution, according to \ref{eq:otdr_resolution}. However, due to filtering nature of the decimation procedure performed on the calculated temperature profile, selecting a lower resolution will in fact yield a \textit{smoother} temperature profile. This is further discussed in the multi-mode scenario, where more comparative measurements were made. For many future measurements, a pulse width of
 \begin{equation}
 T_0 = \SI{25}{\nano \second}
 \end{equation}
@@ -70,17 +70,17 @@ was selected as a representative configuration, yielding a spatial resolution of
 z_0 = \SI{2.5}{\meter} \textrm{.}
 \end{equation}
 
-The final configuration parameter is the laser pulse repetition rate. Intuitively, we wish to have a rate that is large enough to provide a sufficient number of measurements in a given time frame, so that the data averaging can be effective. For most of the measurements, the repetition rate was set to
+The final configuration parameter is the laser pulse repetition rate. Intuitively, we wish to have a rate that is large enough to provide a sufficient number of measurements in a given time frame, so that data averaging can be effective. For most measurements, the repetition rate was set to
 \begin{equation}
 f_R = \SI{1}{\kilo \hertz} \textrm{.}
 \end{equation}
-The data processing software is not this fast. The runtime of a single processing iteration is estimated to be around 10--15 ms. Normally, setting a larger repetition rate would not pose a problem, as the software would only process the data that is last acquired from the DAQ card. However, architecture of the DAQ system needs to be taken into account. As the National Instruments PXIe-5160 has its own acquisition buffer memory, it is capable of performing the data acquisition when triggered, even if a large amount of data is still buffered and not transferred to the LabVIEW environment. A considerable backlog could occur, and the software would continue running the data acquisition loop long after the laser output was turned off. On the other hand, some hanging of the data acquisition software was noticed when setting the repetition rate too high. This could be a result of DAQ card's FIFO memory being overflown while the first data was being transferred to the LabVIEW software. While fine-tuning the DAQ part of the software, the repetition rate of
+Data processing software is not that fast. The runtime of a single processing iteration is estimated to be around 10--15 ms. Normally, setting a larger repetition rate would not pose a problem, as the software would only process the data that is last acquired from the DAQ card. However, architecture of the DAQ system needs to be taken into account. As the National Instruments PXIe-5160 has its own acquisition buffer memory, it is capable of performing the data acquisition when triggered, even if a large amount of data is still buffered and not transferred to the LabVIEW environment \cite{datasheet:daq}\cite{labview:niscope}. A considerable back-log could occur, and software would continue running the data acquisition loop long after the laser output was turned off. On the other hand, some hanging of data acquisition software was noticed when setting the repetition rate too high. This could be a result of DAQ card's FIFO memory being overflown while the first data was still being transferred to the LabVIEW software. While fine-tuning the DAQ part of the software, a repetition rate of
 \begin{equation}
 f_R = \SI{100}{\hertz}
 \end{equation}
 was found to be sufficient for this purpose. \\
 
-An example of the final measurement, at maximum allowable optical power is given in Figure \ref{fig:smf_final}.
+An example of the final measurement, at maximum allowable optical power, is given in Figure \ref{fig:smf_final}.
 %\label{smf:final}
 %13.04.
 It is clear that only the highly non-linear fibre yields results with a reasonable accuracy, measured by this example to be about 
@@ -91,13 +91,13 @@ Further data processing is expected to be able to bring the accuracy down to abo
 
 \section{Multi-mode fibres}
 
-As the effective cross-section area of a multi-mode fibre is larger than that of a single-mode fibre, the former is expected to demonstrate better sensing performance and temperature accuracy for this system. With a requirement that the power density does not cross that used in single-mode fibres at highest optical levels, multi-mode fibres will inherently be able to withstand higher peak optical powers before reaching SRS threshold. \\
+As the effective cross-section area of a multi-mode fibre is larger than that of a single-mode fibre, the former is expected to demonstrate better sensing performance and temperature accuracy for this system. Larger cross-section area of fibre core produces lower power densities at a constant power level. According to \ref{eq:raman_threshold}, multi-mode fibres will, therefore, be able to withstand higher peak optical powers before reaching SRS threshold. \\
 
-As described in chapter \ref{ch:setup}, a lot of the optical components were changed to ensure coupling of all the incident optical power, and capturing all the backscattered power from the measurement fibre. For the first multi-mode setup, a cascade of two G.651-compliant fibres was used. The setup is presented in Figure \ref{fig:mmf_first_cascade}.
+As described in chapter \ref{ch:setup}, a lot of the optical components were changed in the multi-mode scenario, to ensure best coupling of incident optical power, and capturing of backscattered power. For the first multi-mode setup, a cascade of two G.651-compliant fibres was used. The setup is presented in Figure \ref{fig:mmf_first_cascade}.
 %\label{fig:mmf_first_cascade}
 The first fibre was 2.3 km, and the second 1.2 km in length. The two fibres were initially connected by SC-APC connectors, and terminated by another SC-APC connector with no matched termination at the end. \\
 
-Different photodetectors were used in this setup. First measurements were performed with PDA10CS-EC with switchable gain. Firstly, the 40 dB setting was used to find the maximum peak optical power that this system could use. Laser's first EDFA pump current was set as in \ref{eq:edfa_first_pump}, while the second EDFA pump current was swept. The qualitative rating of the waveform, and the measured temperature inaccuracy is presented in Table \ref{table:mmf_power_sweep}.
+Different photodetectors were used in this setup. First measurements were performed with PDA10CS-EC with switchable gain. Firstly, the 40 dB setting was used to find the maximum peak optical power this system could use. Laser's first EDFA pump current was set as in \ref{eq:edfa_first_pump}, while the second EDFA pump current was swept. The qualitative rating of the waveform, and the estimated temperature inaccuracy is presented in Table \ref{table:mmf_power_sweep}.
 \begin{table}[h]
 	\centering
 	\caption{Sweeping optical power with an MM fibre}
@@ -111,7 +111,7 @@ Different photodetectors were used in this setup. First measurements were perfor
 		1250 & 15400 & <5--8 & High reflection off the end of the fibres
 	\end{tabular}
 \end{table}
-Multi-mode fibres have proven to be capable of using higher optical powers without inducing SRS, as was expected. Once again, a step in scattering profiles is visible, as a result of reflection against SC-APC connectors between the fibres, which will be dealt with later. A sample scattering profile, acquired with maximum allowed optical power, is shown in Figure \ref{fig:mmf_scatters}. Comparative temperature measurements on two optical powers are also given, in Figure \ref{fig:mmf_power_temperatures}.
+Multi-mode fibres have proven to be capable of using higher optical powers without inducing SRS, as was expected. Once again, a step in scattering profiles is visible, as a result of reflection against SC-APC connectors between the fibres. This problem will be solved by splicing the two fibres later on. A sample scattering profile, acquired with maximum allowed optical power, is shown in Figure \ref{fig:mmf_scatters}. Comparative temperature measurements on two optical powers are also given, in Figure \ref{fig:mmf_power_temperatures}.
 %slika
 %\label{fig:mmf_scatters}
 %19.4.
@@ -123,45 +123,45 @@ Multi-mode fibres have proven to be capable of using higher optical powers witho
 %19.4.
 %2-03 temp
 %01 temp
-It is clear that multi-mode fibres provide much better measurement performance, compared to single-mode fibres. Note that the same or better performance is obtained with standard multi-mode fibres, when compared to a highly non-linear single-mode fibre. Temperature inaccuracy is achieved to be 
+It is clear that multi-mode fibres provide much better measurement performance, compared to single-mode fibres. Note that the same or better performance is obtained with standard a multi-mode fibre, in comparison to a highly non-linear single-mode fibre. The achieved temperature accuracy is estimated to be 
 \begin{equation}
 \varDelta T < \SI{5}{\kelvin} \textrm{.}
 \end{equation}
 Some problems still occur at the end of the measurement region, but these are predominantly the result of poor fibre termination. \\
 
-Further measurements were made to evaluate the quality of photodetection diodes. Firstly, PIN diodes PDA10CS-EC were tested, especially with the far weaker anti-Stokes scattering signal. Different gains, and thus different bandwidths, were used to determine the best possible configuration. On the anti-Stokes channel, only the 30 dB and 40 dB options were concluded to provide reasonable measurements. The waveform deterioration on the higher-gain setting was, however, evident. On the Stokes channel, even the 20 dB gain setting was sufficient to maintain a sufficient SNR, whilst pertaining the waveform well. The only viable solution at hand was the use of the APD diode, but the implementation was delayed, so some other interim measurements were performed, with a 40 dB setting of the PIN diode amplifiers. \\
+Further measurements were made to evaluate the quality of photo-detection diodes. Firstly, PIN diodes PDA10CS-EC were tested, especially with the far weaker anti-Stokes scattering signal. Different gains, and thus different bandwidths, were used to determine the best possible configuration. On the anti-Stokes channel, only the 30 dB and 40 dB options were concluded to provide reasonable measurements. However, waveform deterioration on higher-gain setting was evident. On Stokes channel, even the 20 dB gain setting was sufficient to maintain a reasonable SNR, whilst reproducing waveform features well. The only viable solution for anti-Stokes channel was the use of an APD diode, but the implementation was delayed. Some other interim measurements were performed, with a 40 dB setting on PIN diode amplifiers. \\
 
 The next step was adding a patch cable between the two cascaded fibres, as shown in Figure \ref{fig:mmf_second_cascade}.
 %\label{fig:mmf_second_cascade}
-The patch was 50 m in length, and was kept in full standard shielding to enable safe temperature control of the fibre. This fibre was, therefore, selected as a stretch that will be subjected to heating and cooling, in order to measure system performance with different temperatures along the line. The middle position in the system was chosen to ensure no unwanted effects from reflections against fibre ends will occur, obscuring the actual measurement result. All the three system parts were spliced together, eliminating reflections. The immediate effect is visible in scattered components. An example of a newly-measured scattering profile is given in Figure \ref{fig:mmf_patch_scatters}.
+The patch is 50 m in length. It was inserted to serve as a stretch that will be subjected to heating and cooling, in order to measure system performance with different temperatures along the line. Therefore, the patch was kept in full standard shielding to enable safe temperature control. The middle position in the system was chosen to ensure no unwanted effects from reflections against fibre ends would occur, obscuring the actual measurement result. All three system parts were spliced together, eliminating reflections. The immediate effect is visible in scattering profiles. An example of a new measurement is given in Figure \ref{fig:mmf_patch_scatters}.
 %\label{fig:mmf_patch_scatters}
 %10.05.
 %initial.png stokes as
-The step-like behaviour in the profiles has disappeared, showing the splices to have minimum losses. \\
+The step-like behaviour in the profiles has disappeared, proving that the splices have minimum losses. \\
 
 The patch cable was now heated to \SI{50}{\celsius}. The scattered signals and temperature profile are displayed in Figure \ref{fig:first_50c}.
 %\label{fig:first_50c}
 %10.5.
 %50C.png stokes as temp ... mozda moze 48C.csv
-The temperature profile clearly and accurately shows the temperature difference between the fibre parts. Some problems are also evident. The first is the width of the temperature step. Although the patch length is 50 m, and only the patch was heated, the measured temperature shift has an apparent relaxation that \textit{runs} for about 200 effective meters. As the amplifiers for PIN diodes were set to the 40 dB gain option, their bandwidth was mere \SI{320}{\kilo \hertz}, which was considered insufficient to properly measure rapid temperature changes. Readings from discrete temperature sensor were now implemented as a calibration mechanism. Therefore, the temperature at the beginning of the calculated profile indeed corresponds to the actual room temperature, which most of the measurement fibres were in. However, due to errors in temperature calculation term, caused by the reasons already discussed in chapter \ref{ch:data_processing}, the temperature profile exhibits a constant slope. So, the absolute temperature error at the end of the measurement fibre is 
+The temperature profile clearly and accurately shows the temperature difference between fibre parts. Some problems are also evident. The first is the width of the temperature step. Although the patch length is 50 m, and only the patch was heated, the measured temperature shift has an apparent relaxation that \textit{runs} for about 200 effective metres. As the amplifiers for PIN diodes were set to the 40 dB gain option, their bandwidth was mere \SI{320}{\kilo \hertz}, which was considered insufficient to properly measure rapid temperature changes. A reading from the discrete temperature sensor was now implemented as a calibration mechanism. Therefore, the temperature at the beginning of the calculated profile corresponds to the actual room temperature, which most of the measurement fibres were in. However, due to errors in temperature calculation term, caused by the reasons already discussed in chapter \ref{ch:data_processing}, the temperature profile exhibits a constant slope. So, the absolute temperature error at the end of the measurement fibre is 
 \begin{equation}
 \varDelta T_\textrm{total} \approx \SI{15}{\kelvin} \textrm{.}
 \end{equation}
 PIN diodes were thus identified as the limiting component of the current measurement system. Therefore, a more sensitive component had to be implemented, especially on the anti-Stokes channel.
 
-The next step was, therefore, implementing an APD-based photodetector on the anti-Stokes channel. The model used was APD130C by Thorlabs. Its characteristic were presented in chapter \ref{ch:setup}. The diode is declared to have very low noise, high responsivity and large bandwidth, making it ideal for monitoring weak anti-Stokes scattered signals. The manufacturer indicated the possible problems that may occur, as the detector size is only 0.2 mm in diameter \cite{datasheet:apd130c}. The light from the fibre tip is expected to diverge, leading to high coupling losses, especially in multi-mode applications. Some adaptation to the stock photodetector had to be made. An additional fibre collimator, aspheric focusing lens, as well as mechanical mounting devices were obtained from Thorlabs to ensure maximum light-coupling from the fibre to the photodetector. The schematic view of the optical setup at the photodetector is presented in Figure \ref{fig:apd_optics}.
+The next step was, therefore, implementing an APD-based photodetector on the anti-Stokes channel. The model used was APD130C by Thorlabs. Its characteristics were presented in chapter \ref{ch:setup}. The diode is declared to have very low noise, high responsivity and large bandwidth, making it ideal for monitoring weak anti-Stokes scattered signals. The manufacturer indicated possible problems that may occur, as the detector size is only 0.2 mm in diameter \cite{datasheet:apd130c}. The light from the fibre tip is expected to diverge, leading to high coupling losses, especially in multi-mode applications. Some adaptations to the stock photodetector had to be made. An additional fibre collimator, aspheric focusing lens, as well as mechanical mounting devices were obtained from Thorlabs to ensure maximum light-coupling from the fibre to the photodetector. Schematic view of the optical setup at the photodetector is presented in Figure \ref{fig:apd_optics}.
 %\label{fig:apd_optics}
-The photodetector was then connected to a constant-wave optical source, and the additional optical components mechanically aligned, so that maximum detected power was measured. In this process, the same multi-mode fibres were used, as those used in actual anti-Stokes measurement scenario. \\
+The photodetector was then connected to a constant-wave optical source. The additional optical components were then mechanically aligned, so that the received power became maximum, indicating good focusing and alignment. In this process, the same multi-mode fibres were used, as those used in actual anti-Stokes measurement scenario. \\
 
-After calibrating the APD diode, the PIN-based photodetector monitoring the Stokes scattering was configured to the 20 dB gain option, in order to increase the bandwidth. A new measurement was made at room temperature. Additionally, a coreless termination fibre was spliced to the end of the measurement cascade. The termination fibre reduced reflection off the system end, and the spikes at the end of scattering profiles were almost completely reduced. The measurement is displayed in Figure \ref{fig:apd_scattering}.
+After calibrating the APD diode, the PIN-based photodetector monitoring Stokes scattering was re-configured to the 20 dB gain option, in order to increase bandwidth. A new measurement was made at room temperature. Additionally, a core-less termination fibre was spliced to the end of the measurement cascade. The termination fibre reduced reflection off the system end, and the spikes previously found at the end of scattering profiles were almost completely reduced. The measurement is displayed in Figure \ref{fig:apd_scattering}.
 %\label{fig:apd_scattering}
 %12.06
 %Scatterings
-At this point, the anti-Stokes measurement exhibits even better SNR than the Stokes measurement. This is due to a relatively low gain on the PIN diode-side. Nevertheless, this configuration has been selected so as not to lose the large bandwidth enabled by the APD diode. The low-bandwidth limitation of the PIN diode was still visible after heating the patch fibre to about \SI{60}{\celsius} and inspecting the measurement shown in Figure \ref{fig:apd_60c}.
+At this point, the anti-Stokes measurement exhibits even better SNR than the Stokes measurement. This is due to a relatively low gain on the PIN diode-side. Nevertheless, this gain-configuration option was left intact, so as not to deteriorate the large bandwidth enabled by the APD diode. The low-bandwidth limitation of the PIN diode was still visible after heating the fibre patch to about \SI{60}{\celsius} and inspecting the measurement result shown in Figure \ref{fig:apd_60c}.
 %\label{fig:apd_60c}
 %12.06.
 %61C-zoom. sve komponente
-The Stokes profile still features a relaxation after the step, and the resulting temperature profile has a subsequent error at the beginning and the end of the patch. It is, therefore, concluded that a high-bandwidth APD diode is an advisable option for the Stokes channel, as well. Nevertheless, the achieved measurement performance was satisfactory. The final measurement inaccuracy was
+The Stokes profile still features a relaxation after the step, and the resulting temperature profile has a subsequent error at the beginning and at the end of the patch. It is, therefore, concluded that a high-bandwidth APD diode is an advisable option for the Stokes channel, as well. Nevertheless, the achieved measurement performance was satisfactory. Final temperature inaccuracy of the implemented system was
 \begin{equation}
 \varDelta T \approx \SI{5}{\kelvin} \textrm{,}
 \end{equation}
