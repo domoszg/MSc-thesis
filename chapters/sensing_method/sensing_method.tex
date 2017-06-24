@@ -17,16 +17,24 @@ Optical fibres can be used to measure a variety of physical quantities, utilizin
 	\item[Scattering-based] -- An Optical time-domain interferometer (abbr. OTDR) monitors a backscattered signal produced as a result of intrinsic optical effects.
 	\item[Polarization-based] -- Perturbation in the parameter of interest changes the polarization of an incident signal, and causes formation of cross-polarized elements.
 \end{description}
-Another feature of some fibre-optical sensors is the requirement of reaching the sensing element only from the one side, as opposed to connecting the sensing element at both ends. This is primarily a feature of scattering-based sensors, as only back-scattered signal may be sufficient in determining the required information. Generally, a distributed sensor can function in quasi-distributed -- as shown in Figure \ref{fig:quasi_distributed} -- or distributed configuration \cite{Rogers1999}.
-%\label{fig:quasi_distributed}
-%Alan Roger 1999
-In a quasi-distributed configuration, couplers are placed at discrete points along the measurement fibre, and terminated in the coupled branch with a totally-reflective device. The measured reflectance can then be time-demultiplexed in order to obtain measurements at multiple discrete points along the fibre. On the other hand, a fully-distributed configuration uses scattering effects within the fibre, and measures the backscattered signal, providing a continuous profile of the measured quantity. The achieved measurement method is OTDR.\\
+Another feature of some fibre-optical sensors is the requirement of reaching the sensing element only from the one side, as opposed to connecting the sensing element at both ends. This is primarily a feature of scattering-based sensors, as only back-scattered signal may be sufficient in determining the required information. Generally, a distributed sensor can function in quasi-distributed, or distributed configuration \cite{Rogers1999}. In a quasi-distributed configuration, couplers are placed at discrete points along the measurement fibre, and terminated in the coupled branch with a totally-reflective device, as presented in Figure \ref{fig:quasi_distributed}.
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.6\textwidth]{quasi_distributed.png}
+	\caption{Quasi-distributed sensor \cite{Rogers1999}}
+	\label{fig:quasi_distributed}
+\end{figure}
+The measured reflectance can then be time-demultiplexed in order to obtain measurements at multiple discrete points along the fibre. On the other hand, a fully-distributed configuration uses scattering effects within the fibre, and measures the backscattered signal, providing a continuous profile of the measured quantity. The achieved measurement method is OTDR.\\
 
 \section{Optical time-domain reflectometry}
 
 In its elementary form, OTDR is used for characterizing an optical fibre or an optical link along its length \cite{UnderstandingOTDRs2000}. The effect enabling this kind of measurement is the backscattered Rayleigh signal. A block diagram of an OTDR system is shown in Figure \ref{fig:otdr_block}.
-%\label{fig:otdr_block}
-%Uobicajeni dijagram ili onaj iz Rogers 1999
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.7\textwidth]{otdr_block.png}
+	\caption{Block diagram of an OTDR system \cite{Rogers1999}}
+	\label{fig:otdr_block}
+\end{figure}
 A laser is placed at the beginning of the measurement fibre, and its optical output coupled to it through a circulator. The measurement fibre is then excited by a laser pulse with an optical signal of power $P_0$, and pulse width $T_0$. As the pulse propagates along the fibre, it will suffer losses determined by the attenuation coefficient $\alpha$. As discussed in chapter \ref{ch:fibres}, a fundamental loss mechanism is Rayleigh scattering. Therefore, it is convenient to represent $\alpha$ as a sum \cite{agrawal}
 \begin{equation}
 \alpha = \alpha_R + \alpha_a \textrm{,}
@@ -78,8 +86,12 @@ The scattered signal, once propagated to the beginning of the measurement fibre,
 z_0 = \frac{c}{n_\textrm{g}} \cdot \frac{T_0}{2} \textrm{,}
 \end{equation}
 that relates the elapsed time to the propagated distance, one can use the x-axis of the oscilloscope as an indication as to where the observed scattering on the y-axis took place along the measurement fibre. The resulting image is, thus, a fibre profile along its length. A sample OTDR measurement is shown in Figure \ref{fig:otdr_sample}.
-%%% FIGURE
-%\label{fig:otdr_sample}
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.9\textwidth]{otdr_sample.png}
+	\caption{A sample OTDR measurement}
+	\label{fig:otdr_sample}
+\end{figure}
 The loss introduced by Rayleigh scattering is manifested as a slope in the measured profile. Fibre attenuation can be easily retrieved by determining the slope. Other anomalies on the fibre can be observed, such as splicing and connector losses, Fresnel reflections off fibre ends, etc. All the losses at different points in the measurement fibre can be numerically measured on the oscilloscope screen.\\
 
 
