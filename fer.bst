@@ -1324,7 +1324,7 @@ FUNCTION {presort}
 
 ITERATE {presort}
 
-SORT
+%SORT
 
 STRINGS { longest.label last.label next.extra }
 

@@ -193,6 +193,7 @@
    \chapter*{\contentsname
    \@mkboth{%
    \MakeUppercase\contentsname}{\MakeUppercase\contentsname}}%
+   \vspace*{-3em}
    \@starttoc{toc}%
 }
 

@@ -9,7 +9,7 @@
 
 % --------------------------------------
 
-The laboratory setup described in chapter \ref{ch:setup} enables simple change of measurement fibres, i.e. sensing elements, as well as use of different photodetectors. Here, different sets of single-mode and multi-mode fibres were tested. Different PIN photodiodes with electrical amplifiers and APD photodiodes were tested, according to table \ref{table:photodetectors}. Additionally, different laser configurations and data processing algorithms were tested in the development process of the measurement system.
+The laboratory setup described in chapter \ref{ch:setup} enables simple change of measurement fibres, i.e. sensing elements, as well as use of different photodetectors. Here, different sets of single-mode and multi-mode fibres were tested. Different PIN photodiodes with electrical amplifiers and APD photodiodes, specified in Table \ref{table:photodetectors}, were tested. Additionally, different laser configurations and data processing algorithms were tested in the development process of the measurement system. This chapter reviews the obtained results, comparing the single-mode and multi-mode scenario.
 
 \section{Single-mode fibres}
 
@@ -25,17 +25,16 @@ On the near side of the measurement and excitation equipment, a 2.3 km long roll
 The first measurements were conducted with a simple data processing algorithm, which used only a classical averaging filter. SNR improvement with time is evident, although further measurements did not yield any better results. The averaging filter has probably reached its best result in terms of the final SNR, while it still remains a very slow solution for filtering the signals. The next step in developing the data processing algorithm was the implementation of an adaptive LMS filter. A comparison of results between the classical averaging filter and the adaptive LMS filter is given in Figure \ref{fig:classic_lms_compare}.
 \begin{figure}[h]
 	% Measurements 30.03.2017
-	\centering
 	\begin{subfigure}[b]{0.49\textwidth}
 		\begin{tabular}{c}
-			\includegraphics[width=\textwidth]{classic_lms_compare_stokes_classic.png} \\
+			\includegraphics[width=\textwidth]{classic_lms_compare_stokes_classic.png} \vspace{1em} \\
 			\includegraphics[width=\textwidth]{classic_lms_compare_antistokes_classic.png}
 		\end{tabular}
 		\caption{Classic averaging filter}
 	\end{subfigure}
-	\begin{subfigure}[b]{0.49\textwidth}
+	\begin{subfigure}[b]{0.5\textwidth}
 		\begin{tabular}{c}
-			\includegraphics[width=\textwidth]{classic_lms_compare_stokes_lms.png} \\
+			\includegraphics[width=\textwidth]{classic_lms_compare_stokes_lms.png} \vspace{1em} \\
 			\includegraphics[width=\textwidth]{classic_lms_compare_antistokes_lms.png}
 		\end{tabular}
 		\caption{Adaptive LMS filter}
@@ -50,7 +49,7 @@ Whilst observing the scattering profiles, one must estimate the maximum incident
 I_1 = \SI{400}{\milli \ampere} \textrm{.}
 \end{equation}
 The lower setting of the first pump power ensured small ASE, although this has been further filtered, as described in chapter \ref{ch:setup}. The second pump power was swept, and the peak optical power measured. The qualitative rating of the waveform, as well as the estimated temperature inaccuracy is presented in Table \ref{table:smf_power_sweep}.
-\begin{table}[h]
+\begin{table}[t]
 	\centering
 	\caption{Sweeping optical power with an SM fibre}
 	\label{table:smf_power_sweep}
@@ -86,13 +85,13 @@ T_0 = \SI{25}{\nano \second}
 was selected as a representative configuration, yielding a spatial resolution of
 \begin{equation}
 z_0 = \SI{2.5}{\meter} \textrm{.}
-\end{equation}
+\end{equation} \\
 
 The final configuration parameter is the laser pulse repetition rate. Intuitively, we wish to have a rate that is large enough to provide a sufficient number of measurements in a given time frame, so that data averaging can be effective. For most measurements, the repetition rate was set to
 \begin{equation}
 f_R = \SI{1}{\kilo \hertz} \textrm{.}
 \end{equation}
-Data processing software is not that fast. The runtime of a single processing iteration is estimated to be around 10--15 ms. Normally, setting a larger repetition rate would not pose a problem, as the software would only process the data that is last acquired from the DAQ card. However, architecture of the DAQ system needs to be taken into account. As the National Instruments PXIe-5160 has its own acquisition buffer memory, it is capable of performing the data acquisition when triggered, even if a large amount of data is still buffered and not transferred to the LabVIEW environment \cite{datasheet:daq}\cite{labview:niscope}. A considerable back-log could occur, and software would continue running the data acquisition loop long after the laser output was turned off. On the other hand, some hanging of data acquisition software was noticed when setting the repetition rate too high. This could be a result of DAQ card's FIFO memory being overflown while the first data was still being transferred to the LabVIEW software. While fine-tuning the DAQ part of the software, a repetition rate of
+Data processing software is not that fast. The runtime of a single processing iteration is estimated to be around 10--15 ms. Normally, setting a larger repetition rate would not pose a problem, as the software would only process the data that is last acquired from the DAQ card. However, architecture of the DAQ system needs to be taken into account. As the National Instruments PXIe-5160 has its own acquisition buffer memory, it is capable of performing the data acquisition when triggered, even if a large amount of data is still buffered and not transferred to the LabVIEW environment \cite{datasheet:daq}. A considerable back-log could occur, and software would continue running the data acquisition loop long after the laser output was turned off. On the other hand, some hanging of data acquisition software was noticed when setting the repetition rate too high. This could be a result of DAQ card's FIFO memory being overflown while the first data was still being transferred to the LabVIEW software. While fine-tuning the DAQ part of the software, a repetition rate of
 \begin{equation}
 f_R = \SI{100}{\hertz}
 \end{equation}
@@ -140,7 +139,7 @@ Different photodetectors were used in this setup. First measurements were perfor
 	\end{tabular}
 \end{table}
 Multi-mode fibres have proven to be capable of using higher optical powers without inducing SRS, as was expected. Once again, a step in scattering profiles is visible, as a result of reflection against SC-APC connectors between the fibres. This problem will be solved by splicing the two fibres later on. A sample scattering profile is shown in Figure \ref{fig:mmf_scatters}. Comparative temperature measurements at two optical powers are also given, in Figure \ref{fig:mmf_power_temperatures}.
-\begin{figure}[h]
+\begin{figure}[b!]
 	% Measurement 19.04.
 	\centering
 	\begin{subfigure}[b]{0.49\textwidth}
@@ -186,15 +185,18 @@ The next step was adding a patch cable between the two cascaded fibres, as shown
 The patch is 50 m in length. It was inserted to serve as a stretch that will be subjected to heating and cooling, in order to measure system performance with different temperatures along the line. Therefore, the patch was kept in full standard shielding to enable safe temperature control. The middle position in the system was chosen to ensure no unwanted effects from reflections against fibre ends would occur, obscuring the actual measurement result. All three system parts were spliced together, eliminating reflections. The immediate effect is visible in scattering profiles. The step-like behaviour has disappeared, proving that the splices have minimum losses. \\
 
 The patch cable was now heated to about \SI{50}{\celsius}. The scattered signals and temperature profile are displayed in Figure \ref{fig:first_50c}.
-\begin{figure}[h]
-	\centering
+\begin{figure}[h!]
 	\begin{subfigure}[b]{0.49\textwidth}
+		\flushleft
 		\includegraphics[width=\textwidth]{first_50c_stokes.png}
 		\caption{Stokes component}
+		\vspace{1em}
 	\end{subfigure}
 	\begin{subfigure}[b]{0.49\textwidth}
+		\flushright
 		\includegraphics[width=\textwidth]{first_50c_antistokes.png}
 		\caption{Anti-Stokes component}
+		\vspace{1em}
 	\end{subfigure}
 	\begin{subfigure}[b]{\textwidth}
 		\centering
@@ -208,34 +210,36 @@ The temperature profile clearly and accurately shows the temperature difference 
 \begin{equation}
 \varDelta T_\textrm{total} \approx \SI{15}{\kelvin} \textrm{.}
 \end{equation}
-PIN diodes were thus identified as the limiting component of the current measurement system. Therefore, a more sensitive component had to be implemented, especially on the anti-Stokes channel.
+PIN diodes were thus identified as the limiting component of the current measurement system. Therefore, a more sensitive component had to be implemented, especially on the anti-Stokes channel. \\
 
 The next step was, therefore, implementing an APD-based photodetector on the anti-Stokes channel. The model used was APD130C by Thorlabs. Its characteristics and calibration procedure were presented in chapter \ref{ch:setup}. The diode is declared to have very low noise, high responsivity and large bandwidth, making it ideal for monitoring weak anti-Stokes scattered signals. After calibrating the APD diode, the PIN-based photodetector monitoring Stokes scattering was re-configured to the 20 dB gain option, in order to increase bandwidth. A new measurement was made at room temperature. Additionally, a core-less termination fibre was spliced to the end of the measurement cascade. The termination fibre reduced reflection off the system end, and the spikes previously found at the end of scattering profiles were almost completely reduced. The measurement is displayed in Figure \ref{fig:apd_scattering}.
 \begin{figure}[h]
 	% Measurement 12.06.
-	\centering
 	\begin{subfigure}[b]{0.49\textwidth}
-		\includegraphics[width=\textwidth]{apd_scattering_stokes}
+		\flushleft
+		\includegraphics[width=0.99\textwidth]{apd_scattering_stokes}
 		\caption{Stokes component}
 	\end{subfigure}
 	\begin{subfigure}[b]{0.49\textwidth}
-		\includegraphics[width=\textwidth]{apd_scattering_antistokes.png}
+		\flushright
+		\includegraphics[width=0.99\textwidth]{apd_scattering_antistokes.png}
 		\caption{Anti-Stokes component}
 	\end{subfigure}
 	\caption{Measurement with an APD diode at the anti-Stokes channel}
 	\label{fig:apd_scattering}
 \end{figure}
 At this point, the anti-Stokes measurement exhibits even better SNR than the Stokes measurement. This is due to a relatively low gain on the PIN diode-side. Nevertheless, this gain-configuration option was left intact, so as not to deteriorate the large bandwidth enabled by the APD diode. The low-bandwidth limitation of the PIN diode was still visible after heating the fibre patch to about \SI{60}{\celsius} and inspecting the measurement result shown in Figure \ref{fig:apd_60c}.
-\begin{figure}[h]
+\begin{figure}[h!]
 	% Measurement 12.06.
-	\centering
 	\begin{subfigure}[b]{0.49\textwidth}
 		\includegraphics[width=\textwidth]{apd_60c_stokes.png}
 		\caption{Stokes component}
+		\vspace{1em}
 	\end{subfigure}
 	\begin{subfigure}[b]{0.49\textwidth}
 		\includegraphics[width=\textwidth]{apd_60c_antistokes.png}
 		\caption{Anti-Stokes component}
+		\vspace{1em}
 	\end{subfigure}
 	\begin{subfigure}[b]{\textwidth}
 		\centering
@@ -278,11 +282,13 @@ The final set of graphs in Figure \ref{fig:final_measurements} presents measurem
 			\centering
 			\includegraphics[width=0.8\textwidth]{final_measurements_-2c.png}
 			\caption{$T = \SI{-2}{\celsius}$}
+			\vspace{1em}
 		\end{subfigure}
 		\begin{subfigure}[b]{0.49\linewidth}
 			\centering
 			\includegraphics[width=0.8\textwidth]{final_measurements_10c.png}
 			\caption{$T = \SI{10}{\celsius}$}
+			\vspace{1em}
 		\end{subfigure}
 		\begin{subfigure}[b]{0.49\linewidth}
 			\centering
