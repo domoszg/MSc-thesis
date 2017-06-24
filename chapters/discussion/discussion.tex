@@ -12,9 +12,12 @@
 The implemented system produced a fine temperature and spatial resolution. Some issues that were discussed could be mitigated by hardware or software enhancements. Firstly, measurement fibres should be properly terminated, and the use of opto-mechanical connectors reduced. Connectors, especially those of FC-type, have demonstrated large reflections, that can even induce the occurrence of SRS at otherwise moderate optical powers. Therefore, splicing of all fibre sections is recommended. This ensures very small insertion losses, as was evident by the results represented in chapter \ref{ch:results}. \\
 
 The used laser source proved to be sufficient in obtaining good measurement results in this system. It was, however, noted that the laser did not feature any power control, and that once configured power levels were unrepeatable and unstable during a measurement period. This phenomenon has little effect on measurement performance, as the Stokes and anti-Stokes signal, both influenced by incident optical power change, are divided in the numerical process. As long as the fibre remains in the spontaneous-Raman regime, laser instability will be negligible. Laser pulse was, however, noted to be of irregular shape, having two significant peaks, as presented in Figure \ref{fig:laser_waveform}.
-%\label{fig:laser_waveform}
-%14.06.
-% csv bilo koji
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.8\textwidth]{laser_waveform.png}
+	\caption{Laser impulse waveform, $T_0 = \SI{25}{\nano \second}$}
+	\label{fig:laser_waveform}
+\end{figure}
 The theoretical background assumes a step-like optical excitation of the measurement fibre. Therefore, an excitation by any other waveform will in fact produce a convolution of the impulse waveform $l(t)$ with the system impulse response $h(t)$, as
 \begin{equation}
 y(t) = l(t) \ast h(t) \textrm{.}

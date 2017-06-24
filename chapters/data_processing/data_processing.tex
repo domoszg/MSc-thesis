@@ -16,22 +16,32 @@ The data acquired by a DAQ card is processed in LabVIEW 2013 software by Nationa
 Data acquisition is performed in a while loop, during the entire program runtime. While repeating the loop, one must ensure that the DAQ card performs only data acquisition, and not system reconfiguration. Otherwise, acquisition time would greatly deteriorate. The \textit{NI-SCOPE} toolbox provides both an Express VI for data acquisition, as well as separate VI for a more hands-on configuration and acquisition approach \cite{labview:niscope}. The implemented program uses an Express VI. The VI has an optional input \textit{Close}, which has to be connected to a False constant, to ensure the DAQ card is configured only on the first iteration of the while loop the VI resides in. \\
 
 The data processing algorithm is displayed by a block diagram in Figure \ref{fig:program_block}.
-%\label{fig:program_block}
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\textwidth]{program_block}
+	\caption{Block diagram of the data processing algorithm}
+	\label{fig:program_block}
+\end{figure}
 In order to increase the processing speed, and so as not to skip any acquired samples, separate algorithms were developed, the one handling data acquisition, and the other for signal processing. The execution sequence is thus separated and handled by LabVIEW. Exchange of acquired data is performed by a queue structure. The queue is ensured to have a sufficient length to fit all the buffered data. LabVIEW inherently halts the data processing algorithm while the queue is empty, i.e. before the data is acquired from the DAQ device. \\
 
 The DAQ card supports a maximum input signal frequency of 500 MHz \cite{datasheet:daq}, which corresponds to a minimum period
 \begin{equation}
 T_\textrm{min} = \SI{2}{\pico \second} \textrm{.}
 \end{equation}
-This ensures proper detection of source laser optical pulse, and is also well beyond the maximum bandwidth of used photodetectors. The acquisition memory length is set to 50000 samples. In this laboratory setup, this is enough to capture the signal backscattered from the end of the measurement fibre. It was observed that the DAQ card has a transient at the beginning of the acquisition windows. Therefore, the trigger, connected to the 1\% tap output of the laser, was set to be at the 50\% reference position, meaning that 25000 samples before the trigger, and 25000 samples after will be acquired. This is still enough to observe backscattering through the entire length of the measurement fibre. Channels connected to Stokes and anti-Stokes-monitoring photodetectors are AC-coupled to the DAQ card. This is to remove the DC bias of photodetectors that is of no interest in this system. Given the duty cycle of the optical pulse, the measured signal will still be around zero-value when it exits the range of the measurement fibre. However, additional zero-value correction is performed, which will be covered later on. \\
+This ensures proper detection of source laser optical pulse, and is also well beyond the maximum bandwidth of used photodetectors. The acquisition memory length is set to 100000 samples. In this laboratory setup, this is enough to capture the signal backscattered from the end of the measurement fibre. It was observed that the DAQ card has a transient at the beginning of the acquisition windows. Therefore, the trigger, connected to the 1\% tap output of the laser, was set to be at the 50\% reference position, meaning that 50000 samples before the trigger, and 50000 samples after will be acquired. This is still enough to observe backscattering through the entire length of the measurement fibre. Channels connected to Stokes and anti-Stokes-monitoring photodetectors are AC-coupled to the DAQ card. This is to remove the DC bias of photodetectors that is of no interest in this system. Given the duty cycle of the optical pulse, the measured signal will still be around zero-value when it exits the range of the measurement fibre. However, additional zero-value correction is performed, which will be covered later on. \\
 
 \section{Filtering}
 
 As the monitored Stokes and anti-Stokes signals are very weak, they are highly noised at the photodetectors' output. By acquiring a large number of samples, and filtering the results, one can increase the SNR of measured signals. This will finally decrease the measured temperature error. While developing the data processing algorithm, several filtering algorithms were implemented and tested. Important characteristics of observed noise need to be taken into account while developing the algorithm. For the large part, the noise is white in character, and as such uncorrelated to the useful signal. \\
 
 The first implemented algorithm is a simple averaging filter. The filter works well, and the measured temperature had a sufficiently low inaccuracy. However, the required averaging time to achieve this precision was more than 5 minutes. Therefore, this method was abandoned in favour of faster algorithms. The next implemented approach was an adaptive filter using the least-mean-square error (abbr. LMS) method. A block diagram of such a filter is presented in Figure \ref{fig:lms_block}.
-%\label{fig:lms_block}
-The linear filter in the block diagram is an FIR filter \cite{labview:aft}. Its function can be expressed as \cite{anc}\cite{mitlecture25}\cite{fer:dos}\cite{adaptivno0069}
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.7\textwidth]{lms_block.png}
+	\caption{Block diagram of an adaptive filter \cite{labview:filter}}
+	\label{fig:lms_block}
+\end{figure}
+The linear filter in the block diagram is an FIR filter. Its function can be expressed as \cite{anc}\cite{mitlecture25}\cite{fer:dos}\cite{adaptivno0069}
 \begin{equation}
 y(n) = x(n) \cdot w(n) \textrm{,}
 \end{equation}
@@ -51,12 +61,28 @@ We may assume any relevant temperature shift to be spectrally limited predominan
 
 The approach applied for the two averaging algorithms is to use all the entire history of acquired samples while filtering. This requires low memory usage, as the once filtered samples may be removed from memory. However, such a system can not respond to a fast change in temperature, as averaging would filter the measured change out. To make a responsive system, one must first determine the averaging time, i.e. the number of averaged samples, required to obtain a desired SNR in measured signals. This will decide on the responsivity of the system. Next, a moving average filter should be implemented. Such a filter utilizes a \textit{filtering window}, taking only a predefined number of samples into account. This requires a large amount of memory, as all the samples in the filtering window need to persist for proper calculation. In an implemented prototype the processing time of each filter tap has proven to be extremely long, which is the result of a double float representation in LabVIEW of all the sampled data. This, along with the problem of high memory usage, has rendered this method impractical for use in current setup. \\
 
-After filtering, waveforms are obtained, representing Stokes and anti-Stokes components in time. These can be plotted against a time-scale, that corresponds to a linear position on the measurement fibre. The position is obtained by equation \ref{eq:otdr_time_distance}, where the elementary time unit corresponds to one sampling period
-\begin{equation}
-t_\textrm{S} = \frac{1}{f_\textrm{S}} = \SI{0.8}{\nano \second} \textrm{.}
-\end{equation}
-An example of acquired signals before and after filtering is given in Figure \ref{fig:daq_example}.
-%\label{fig:daq_example}
+After filtering, waveforms are obtained, representing Stokes and anti-Stokes components in time. An example of acquired signals before and after filtering is given in Figure \ref{fig:daq_example}.
+\begin{figure}[h]
+	\centering
+	\begin{subfigure}[b]{0.49\textwidth}
+		\includegraphics[width=\textwidth]{daq_example_stokes_current.png}
+		\caption{Stokes channel, current value}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.49\textwidth}
+		\includegraphics[width=\textwidth]{daq_example_antistokes_current.png}
+		\caption{Anti-Stokes channel, current value}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.49\textwidth}
+		\includegraphics[width=\textwidth]{daq_example_stokes_filtered.png}
+		\caption{Stokes channel, filtered value}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.49\textwidth}
+		\includegraphics[width=\textwidth]{daq_example_antistokes_filtered.png}
+		\caption{Anti-Stokes channel, filtered value}
+	\end{subfigure}
+	\caption{Filtering acquired signals}
+	\label{fig:daq_example}
+\end{figure}
 
 
 \section{Temperature calculation}
@@ -65,10 +91,15 @@ The filtered Stokes and anti-Stokes profiles can be used to obtain the measureme
 \begin{equation}
 \varDelta E = \hbar (\omega_0 - \omega_\textrm{S}) \textrm{,}
 \end{equation}
-where $\omega_0$ is the optical frequency of the initial pulse, and $\omega_\textrm{S}$ the effective frequency of the Stokes component. The effective wavelength was input to the VI after theoretically calculating the effective wavelength of scattered signals. By using a high-sensitivity optical spectrum analyser, the effective frequency could be measured instead, to obtain a more precise value. The ratio of gains between Stokes and anti-Stokes detection channels is a sum ratio of all the different gain parameters found in measurement chains. Firstly, this includes photodetectors' responsivities, which are wavelength-dependent. Next, different photodetectors have different electrical gains, as presented in Table \ref{tab:photodetectors}. All of these differences need to be either measured or taken from datasheets, and included in the ratio. \\
+where $\omega_0$ is the optical frequency of the initial pulse, and $\omega_\textrm{S}$ the effective frequency of the Stokes component. The effective wavelength was input to the VI after theoretically calculating the effective wavelength of scattered signals. By using a high-sensitivity optical spectrum analyser, the effective frequency could be measured instead, to obtain a more precise value. The ratio of gains between Stokes and anti-Stokes detection channels is a sum ratio of all the different gain parameters found in measurement chains. Firstly, this includes photodetectors' responsivities, which are wavelength-dependent. Next, different photodetectors have different electrical gains, as presented in Table \ref{table:photodetectors}. All of these differences need to be either measured or taken from datasheets, and included in the ratio. \\
 
 At different wavelengths, the measurement fibre will have different attenuation coefficients. If the attenuation coefficient difference is not compensated for, the temperature profile will have a slope, as the temperature and the scattering profiles are joined by a negative exponential function. In a controlled scenario, where the temperature along the measurement fibre is the same, one can apply classic OTDR methods to measure the fibre attenuation at different wavelengths. Figure \ref{fig:otdr_attenuation} is taken from a sample OTDR measurement. 
-%\label{fig:otdr_attenuation}
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.7\textwidth]{otdr_attenuation.png}
+	\caption{Measuring fibre attenuation coefficient}
+	\label{fig:otdr_attenuation}
+\end{figure}
 The y-axis is in logarithmic scale. By measuring the slope of the curve, one can obtain the fibre attenuation at given wavelength as \cite{fer:oks}\cite{UnderstandingOTDRs2000}
 \begin{equation}
 \alpha \, \textrm{[dB/km]} = \dfrac{\varDelta P \, \textrm{[dB]}}{\varDelta L \, \textrm{[km]}} \textrm{.}
@@ -84,9 +115,14 @@ for Stokes channel and
 for anti-Stokes channel. \\
 
 At this point, all the terms in \ref{eq:stokes_temperature} are ready and temperature profile can be obtained. An example profile is given in Figure \ref{fig:temperature_example}.
-%\label{fig:temperature_example}
-%Uzeti SMF mjerenje 11.4.
-One can observe a number of issues on the calculated profile, knowing that the measurement fibre was on room temperature. The measurement was conducted by using a cascade of a common G.652-compliant fibre, some 2.3 km in length, followed by a highly non-linear fibre, about 4.2 km in length. The x-axis represents the DAQ sample number. The y-axis is temperature in kelvins. It is clear that the fibre with expressed non-linearities provides a much more accurate temperature profile. Also, the measurement is offset from room temperature, as the correct terms from \ref{eq:stokes_temperatures} are not known. An especially critical term is the effective wavelength of Stokes and anti-Stokes scatterings. At this point, reading from the discrete temperature sensor TMP36 is taken and samples at the beginning of the measurement profile are offset to match the measured temperature. However, one must take care not to calibrate on the part of the measured profile that represents the very beginning or the very end of the fibre. High reflections off optical connectors produce incorrect temperature measurement in these regions. Such errors could be mitigated by using better matching at the ends. Also, a trade-off can be found between the incident optical power and the resulting reflection. By calibrating against the discrete sensor, the calibration inaccuracy of the system will match that of the discrete temperature sensor. In this case, it is \cite{datasheet:tmp36}
+\begin{figure}[h]
+	% Measurement 11.4.
+	\centering
+	\includegraphics[width=0.8\textwidth]{temperature_example.png}
+	\caption{Example temperature profile}
+	\label{fig:temperature_example}
+\end{figure}
+One can observe a number of issues on the calculated profile, knowing that the measurement fibre was on room temperature. The measurement was conducted by using a cascade of a common G.652-compliant fibre, some 2.3 km in length, followed by a highly non-linear fibre, about 4.2 km in length. The x-axis represents the DAQ sample number. The y-axis is temperature in kelvins. It is clear that the fibre with expressed non-linearities provides a much more accurate temperature profile. Also, the measurement is offset from room temperature, as the correct terms from \ref{eq:stokes_temperature} are not known. An especially critical term is the effective wavelength of Stokes and anti-Stokes scatterings. At this point, reading from the discrete temperature sensor TMP36 is taken and samples at the beginning of the measurement profile are offset to match the measured temperature. However, one must take care not to calibrate on the part of the measured profile that represents the very beginning or the very end of the fibre. High reflections off optical connectors produce incorrect temperature measurement in these regions. Such errors could be mitigated by using better matching at the ends. Also, a trade-off can be found between the incident optical power and the resulting reflection. By calibrating against the discrete sensor, the calibration inaccuracy of the system will match that of the discrete temperature sensor. In this case, it is \cite{datasheet:tmp36}
 \begin{equation}
 \varDelta T = \SI{2}{\celsius}
 \end{equation}
@@ -119,7 +155,14 @@ The user interface is presented by Figure \ref{fig:user_interface}. The interfac
 
 Once run, the user interface redraws the acquired and calculated signals after every iteration of the data processing \textit{while} loop. The featured \textit{STOP} button will stop the program execution, while properly closing the DAQ device in the process. Furthermore, a user prompt dialogue will be displayed, allowing the user to input the filename for the comma separated value-formatted (abbr. CSV) output including filtered Stokes and anti-Stokes profiles, calculated temperature profile and last-acquired laser waveform. The CSV file enables further processing in other programming and data analysis environments.
 
-%\label{fig:user_interface}
+\begin{landscape}
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=1.05\linewidth]{user_interface.png}
+		\caption{LabVIEW user interface}
+		\label{fig:user_interface}
+	\end{figure}
+\end{landscape}
 
 % --------------------------------------
 
