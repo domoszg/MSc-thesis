@@ -12,8 +12,13 @@
 An optical fibre enables propagation of light by means of total reflection occurring within its core. Fibres consist of a number of cylindrical layers, the innermost being the core, surrounded by cladding. The two layers are further enclosed in a jacket, following a number of shields and isolation materials, depending on the required cable rigidity and specified applications \cite{fer:oks}. A number of standard types of fibre-optic cables are used in communication systems. These differ by their geometry and the type of optical signal they are able to guide. \\
 
 In order for the light to be guided within the fibre, total reflection against core's boundaries must be ensured to keep the light confined. A geometric-optical interpretation of this mechanism is presented in Figure \ref{fig:critical_angle}.
-%\label{fig:critical_angle}
-A critical angle $\phi_C$ is defined, as the maximum incident angle of the light to the core boundary, so that the light is still reflected against it. The angle is defined as
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.6\textwidth]{critical_angle.png}
+	\caption{Guiding of light in an optical fibre \cite{agrawal}}
+	\label{fig:critical_angle}
+\end{figure}
+A critical angle $\phi_C$ is defined as the maximum incident angle of light to the core boundary, so that the light is still reflected against it. The angle is defined as
 \begin{equation}
 \sin \phi_C = n_2/n_1 \textrm{,}
 \end{equation}
@@ -24,9 +29,21 @@ where $n_1$ is the refractive index of the core, and $n_2$ the refractive index 
 \begin{equation}
 \varDelta = \frac{n_1 - n_2}{n_1} \textrm{.}
 \end{equation}
-These parameters also define the maximum bit-rate-length multiple. As the light propagates, multiple geometrical paths can occur, leading to an arrival-time delay. This phenomenon is referred to as \textit{multipath dispersion}, and is a limiting factor of the bit-rate-length multiple. To reduce the effects of multipath dispersion, graded-index fibres can be used, as opposed to step-index fibres. A comparison of their reflection indices' profiles is presented in Figure \ref{fig:graded_index}.
-%\label{fig:graded_index}
-%Pokazi step i graded
+These parameters also define the maximum bit-rate-length multiple. As the light propagates, multiple geometrical paths can occur, leading to an arrival-time delay. This phenomenon is referred to as \textit{multipath dispersion}, and is a limiting factor of the bit-rate-length multiple. To reduce the effects of multipath dispersion, graded-index fibres can be used, as opposed to step-index fibres. A comparison of their reflection index profiles is presented in Figure \ref{fig:index_profiles}.
+\begin{figure}[h]
+	\centering
+	\begin{subfigure}[b]{0.6\textwidth}
+		\includegraphics[width=\textwidth]{index_profiles_step.png}
+		\caption{Step index profile}
+		\vspace*{1em}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.6\textwidth}
+		\includegraphics[width=\textwidth]{index_profiles_graded.png}
+		\caption{Graded index profile}
+	\end{subfigure}
+	\caption{Fibre index profiles  \cite{fer:oks}}
+	\label{fig:index_profiles}
+\end{figure}
 The gradual decrease in core's refractive index leads to better light confinement towards the centre axis of the fibre core. Thus, multipath dispersion effects will be smaller.\\
 
 Light propagating in the optical fibre can also be observed as a travelling wave. Its propagation is governed by the wave equation
@@ -83,7 +100,12 @@ Parameter $\beta_2$ describes the material dispersion and waveguide dispersion, 
 \subsection{Phase-modulating effects}
 
 Due to its imperfectly cylindrical shape, every fibre exhibits \textit{birefringence}. Two orthogonally polarized modes no longer propagate along the fibre independently, but instead exchange their powers, as presented in Figure \ref{fig:birefringence}.
-%\label{fig:birefringence}
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.6\textwidth]{birefringence.png}
+	\caption{Polarization state exchange in a birefringent fibre \cite{agrawal}}
+	\label{fig:birefringence}
+\end{figure}
 This is due to different refractive indices on two axes, $\bar{n_x}$ and $\bar{n_y}$. They are commonly related by a quantity called \textit{birefringence}
 \begin{equation}
 B_m = \left| \bar{n_x} - \bar{n_y} \right| \textrm{.}
@@ -131,8 +153,20 @@ where $N_A$ is the number of amplifiers used. Therefore, SPM alone is a major li
 
 \subsection{Brillouin scattering}
 
-In distributed temperature sensing systems (abbr. DTS), two non-linear scattering effects can be effectively used. The first is Brillouin effect. It is a result of the electrostriction phenomenon, i.e. the compression of the material in the presence of an electromagnetic field \cite{agrawalNonlinear}. The optical pulse functions as a pump, exciting molecules in the fibre from the ground state into a higher, virtual state. The decay of these states will produce a Stokes component -- with the wavelength being longer than that of the incident optical wave -- or an anti-Stokes component, with the wavelength being shorter than that of the incident optical wave. An illustration of this shift is given in Figure \ref{fig:freq_shift}. 
-%\label{fig:freq_shift}
+In distributed temperature sensing systems (abbr. DTS), two non-linear scattering effects can be effectively used. The first is Brillouin effect. It is a result of the electrostriction phenomenon, i.e. the compression of the material in the presence of an electromagnetic field \cite{agrawalNonlinear}. The optical pulse functions as a pump, exciting molecules in the fibre from the ground state into a higher, virtual state. The decay of these states will produce a Stokes component -- with the wavelength being longer than that of the incident optical wave -- or an anti-Stokes component, with the wavelength being shorter than that of the incident optical wave. An illustration of this shift is given in Figure \ref{fig:freq_shift}.
+\begin{figure}[h]
+	\centering
+	\begin{subfigure}[b]{0.4\textwidth}
+		\includegraphics[width=\textwidth]{freq_shift_stokes.png}
+		\caption{Stokes shift}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.4\textwidth}
+		\includegraphics[width=\textwidth]{freq_shift_antistokes.png}
+		\caption{Anti-Stokes shift}
+	\end{subfigure}
+	\caption{Frequency shifts in energy diagram \cite{Farahani1999}}
+	\label{fig:freq_shift}
+\end{figure}
 The shift will create phonons, i.e. an acoustic wave at frequency
 \begin{equation}
 \Omega = \left|k_A\right| \, v_A = 2 v_A \, \left|k_p\right| \, \sin\left(\theta / 2 \right) \textrm{,}
@@ -198,7 +232,12 @@ Stokes and anti-Stokes central wavelengths are around
 Such frequency shifts can not be observed in the electrical domain, as was the case for Brillouin shifts. Signals at new wavelengths will have to be monitored optically. In this case, temperature information is not coded in the spectrum of scattered signals, but rather in the amplitude. Therefore, Raman-shifted components can be optically filtered and easily detected. \\
 
 In equations \ref{eq:be-s} and \ref{eq:be-as}, one can observe their dependence on the exact energy differences $\varDelta E$. Raman spectrum is very broad, in contrast to a narrow-band Brillouin spectrum. It can be illustrated as in Figure \ref{fig:raman_spectrum}.
-%\label{fig:raman_spectrum}
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.6\textwidth]{raman_spectrum.png}
+	\caption{Raman scattering spectrum \cite{fer:oks}}
+	\label{fig:raman_spectrum}
+\end{figure}
 Typically, the bandwidth of scattered signals is 20--30 THz. These spectra can be well-approximated by a triangular characteristic. Therefore, $\varDelta E$ should be taken by calculating, or measuring effective wavelengths of Stokes and anti-Stokes spectra. \\
 
 Similar to Brillouin scattering, Raman effect can also be spontaneous or stimulated. In stimulated Raman scattering (abbr. SRS), the pump wave will beat with the spontaneously produced Raman-scattered wave. The beating will induce more molecular oscillations, creating a positive feedback loop to the scattered signal. The phenomenon sets in after the incident optical power crosses the threshold value, defined as
