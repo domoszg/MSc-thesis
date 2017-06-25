@@ -41,11 +41,11 @@ The first implemented algorithm is a simple averaging filter. The filter works w
 	\caption{Block diagram of an adaptive filter \cite{labview:filter}}
 	\label{fig:lms_block}
 \end{figure}
-The linear filter in the block diagram is an FIR filter. Its function can be expressed as \cite{anc}\cite{mitlecture25}\cite{fer:dos}\cite{adaptivno0069}
+The linear filter in the block diagram is an FIR filter. Its function can be expressed as \cite{anc}\cite{mitlecture25}
 \begin{equation}
 y(n) = x(n) \cdot w(n) \textrm{,}
 \end{equation}
-where $w(n)$ is the filter coefficient vector. The output signal $e(n)$ is the current error signal, and is in fact the difference between $y(n)$ and reference signal $d(n)$. Filter coefficients are updated by an adaptive algorithm. The algorithm compares the filtered signal with reference after each filter tap. Optimal coefficients are found so as to achieve the minimum mean square error with respect to the reference signal. Coefficients are calculated as \cite{fer:spus}
+where $w(n)$ is the filter coefficient vector. The output signal $e(n)$ is the current error signal, and is in fact the difference between $y(n)$ and reference signal $d(n)$. Filter coefficients are updated by an adaptive algorithm. The algorithm compares the filtered signal with reference after each filter tap. Optimal coefficients are found so as to achieve the minimum mean square error with respect to the reference signal. Coefficients are calculated as
 \begin{equation} \label{eq:normalizedlms}
 w(n+1) = w(n) + \mu \, e(n) \, \frac{x(n)}{\| x(n) \| ^2} \textrm{.}
 \end{equation}
@@ -127,7 +127,7 @@ One can observe a number of issues on the calculated profile, knowing that the m
 \varDelta T = \SI{2}{\celsius}
 \end{equation} \\
 
-Additional correction can be performed in order to eliminate the apparent slope of the temperature profile. The slope is the result of an erroneous measurement of the attenuation coefficient difference. A slope in the resulting temperature profile can be measured, and rotated in post-processing. Next, the x-axis can be scaled using equation \ref{eq:otdr_time_distance} to represent length, rather than sample number. Another correction handles the incorrect data representation of the obtained temperature profile. The number of samples in the profile will be the same as the number of samples in the Stokes and anti-Stokes signal, as temperature is numerically calculated from them. Equation \ref{eq:otdr_resolution}, on the other hand, proves that the spatial measurement resolution is tied to the optical impulse width, rather than the sampling rate of the DAQ device. Decimation is performed on the acquired temperature profile to match the actual resolution of the measurement method. Decimation decreases the sampling rate of a discrete signal by removing extra samples from the signal \cite{fer:dos}. Averaging can be performed in the process, so that the data from extra samples is not lost. Decimation factor $R$ is taken as a ratio of original and target sampling rate, and in this case it can be expressed by the laser impulse width $T_0$ as
+Additional correction can be performed in order to eliminate the apparent slope of the temperature profile. The slope is the result of an erroneous measurement of the attenuation coefficient difference. A slope in the resulting temperature profile can be measured, and rotated in post-processing. Next, the x-axis can be scaled using equation \ref{eq:otdr_time_distance} to represent length, rather than sample number. Another correction handles the incorrect data representation of the obtained temperature profile. The number of samples in the profile will be the same as the number of samples in the Stokes and anti-Stokes signal, as temperature is numerically calculated from them. Equation \ref{eq:otdr_resolution}, on the other hand, proves that the spatial measurement resolution is tied to the optical impulse width, rather than the sampling rate of the DAQ device. Decimation is performed on the acquired temperature profile to match the actual resolution of the measurement method. Decimation decreases the sampling rate of a discrete signal by removing extra samples from the signal. Averaging can be performed in the process, so that the data from extra samples is not lost. Decimation factor $R$ is taken as a ratio of original and target sampling rate, and in this case it can be expressed by the laser impulse width $T_0$ as
 \begin{equation}
 R = \frac{f_H}{f_L} = f_H \cdot T_0 \textrm{.}
 \end{equation}
