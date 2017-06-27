@@ -178,7 +178,7 @@
 % Naredba za dodavanje zahvale.
 \newcommand{\zahvala}[1]{%
 	\newpage
- 	\setcounter{page}{3}
+ 	\setcounter{page}{5}
 	\vspace*{\fill}
 	\hfil {\itshape #1}\hfil
 	\vspace*{\fill}
@@ -188,7 +188,7 @@
 
 % TOC
 \renewcommand\tableofcontents{%
-   \if@dodanazahvala\else \setcounter{page}{4} \fi
+   \if@dodanazahvala\else \setcounter{page}{6} \fi
    \if@radseminar \setcounter{page}{2} \fi
    \chapter*{\contentsname
    \@mkboth{%
