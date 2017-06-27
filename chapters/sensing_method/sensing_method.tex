@@ -45,15 +45,15 @@ where $\alpha_R$ is the contribution of Rayleigh scattering to total losses, and
 \end{equation}
 If an optical pulse of power $P_0$ is sent along the fibre, the optical power at point $z_0$ can be expressed as
 \begin{equation}
-P(z_0) = P_0 \exp\left(-\alpha \, z_0\right) \textrm{,}
+P(z_0) = P_0 \exp\left(-\alpha z_0\right) \textrm{,}
 \end{equation}
-when $alpha$ is expressed in nepers per metre. The power of Rayleigh-reflected optical signal, backscattered from point $z$ to the origin of the optical excitation pulse is expressed by a differential term
+when $\alpha$ is expressed in nepers per metre. The power of Rayleigh-reflected optical signal, backscattered from point $z$ to the origin of the optical excitation pulse is expressed by a differential term
 \begin{equation} \label{eq:otdr_beer}
-dP_R(z) = P_0 \, S \, \alpha_R(z) \, \exp\{ -2 \int_{0}^{z} \alpha(x) dx \} \, dz \textrm{.}
+dP_R(z) = P_0 \, S \, \alpha_R(z) \, \exp\left\{ -2 \int_{0}^{z} \alpha(x) dx \right\} \, dz \textrm{.}
 \end{equation}
 Integrating the term, we arrive at
 \begin{equation} \label{eq:otdr_power}
-P_R(z) = P_0 \, S \, \alpha_R(z) \, \exp\left(-2 \alpha z\right) \, W \textrm{.}
+P_R(z) = P_0 \, S \, W \, \alpha_R(z) \, \exp\left(-2 \alpha z\right) \textrm{.}
 \end{equation}
 A number of important terms in this equation should be discussed. Firstly, note the coefficient 2 in the exponential attenuation term. This emphasises that the observed optical signal has travelled twice the distance to the observed point; The first time as incident signal from the laser source before the scattering, and again while returning back to the observer as the scattered signal. The term $W$ represents the OTDR spatial resolution element. It arose from integrating equation \ref{eq:otdr_beer}, as a fibre segment of length $W$ represents the shortest independent element the OTDR method can differentiate. The length of the resolution element is dependent on the excitation pulse length $T_0$, and can be found as
 \begin{equation} \label{eq:otdr_resolution}
@@ -69,13 +69,13 @@ S' = \frac{2}{3} S \textrm{.}
 \end{equation}
 Usually, expression \ref{eq:otdr_power} is simplified by defining a spreading factor
 \begin{equation}
-\sigma = -10 \log \left( \alpha_R \, S \, W \right) \textrm{,}
+\sigma = -10 \log \left( S \, W \, \alpha_R \right) \textrm{,}
 \end{equation}
 and obtaining a logarithmic expression
 \begin{equation}
-P_R(z) \,\textrm{[dBm]} = P_0 \,\textrm{[dBm]} - \sigma - 2\alpha L \textrm{,}
+P_R(z) = P_0 - \sigma - 2 z \alpha \textrm{,}
 \end{equation}
-where $\alpha$ is expressed in decibels per kilometre. \\
+where $\alpha$ is expressed in decibels per kilometre, and powers in dBm. \\
 
 The scattered signal, once propagated to the beginning of the measurement fibre, arrives at the circulator that couples it to the monitoring branch. The signal is filtered at two scattered components, and can then be observed by a photodiode connected to an oscilloscope. The oscilloscope will be triggered by the initial optical pulse, which can be delivered from the optical source itself. By applying the expression 
 \begin{equation} \label{eq:otdr_time_distance}

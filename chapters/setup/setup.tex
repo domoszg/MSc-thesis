@@ -34,15 +34,17 @@ Measurement fibres can be single fibre-rolls, or consist of a cascade of fibre-r
 The latter solution was used in the second scenario, where multi-mode fibres replaced single-mode as sensing elements. Between the DWDM filter and the circulator, full optical power from single-mode-coupled laser was then coupled into multi-mode fibres. A single-mode circulator was replaced by a multi-mode version. The new circulator has multi-mode fibres factory-spliced onto its ports. It also exhibits low insertion losses, and high isolation. The high-power input is coupled to circulator's port 1, and the fibre-under-test is directly coupled onto port 2. Port 3 was also coupled to the monitoring branch. In the multi-mode scenario, the measurement fibre was expected to be able to withstand higher incident powers before exhibiting stimulated non-linear effects. The threshold power for SRS, from expression \ref{eq:raman_threshold}, is higher, as a result of lower power density in the fibre. Therefore, a standard ITU G.651-compliant fibre was used for this purpose. A number of fibre rolls were spliced together to increase the total system length. Also, a short patch cable, 50 m in length, was inserted between two longer rolls. This simplified temperature control at a known point in the system. The patch was placed in a pot, in which heating and cooling of the fibre was performed by controlling the temperature of the water surrounding it. The isolation of the fibre patch was left unstripped to pertain its thermal and mechanical endurance. \\
 
 The monitoring branch is connected to the circulator, so that the scattered signal from the measurement fibre is coupled into it. Three backscattered components need to be demultiplexed to monitor each component separately. A Raman wavelength-division multiplexer, the so-called \textit{Raman cube}, was used to achieve this. The two versions, one for the single-mode scenario, and the other for the multi-mode scenario, have one common port and three other ports centred at different wavelengths. One port is used to monitor Rayleigh scattering, one to monitor Stokes, and the third for anti-Stokes component. Central wavelengths for the three ports are
-\begin{equation}
-\lambda_\textrm{Ray} = \SI{1551}{\nano \meter}
-\end{equation}
-\begin{equation}
-\lambda_\textrm{S} = \SI{1650}{\nano \meter}
-\end{equation}
-\begin{equation}
-\lambda_\textrm{AS} = \SI{1450}{\nano \meter} \textrm{,}
-\end{equation}
+\begin{subequations}
+	\begin{equation}
+	\lambda_\textrm{Ray} = \SI{1551}{\nano \meter}
+	\end{equation}
+	\begin{equation}
+	\lambda_\textrm{S} = \SI{1650}{\nano \meter}
+	\end{equation}
+	\begin{equation}
+	\lambda_\textrm{AS} = \SI{1450}{\nano \meter} \textrm{,}
+	\end{equation}
+\end{subequations}
 respectively. Some papers report the possibility of measurements of Raman-scattered components being biased due to the leakage of Rayleigh-scattered component through the Raman cube \cite{rayleigh_leakage1}\cite{rayleigh_leakage2}. The Raman cube used in this thesis has the isolation of critical couplings larger than 60 dB, which is sufficient to reduce cross-talk effects. \\
 
 The Raman cube enables wavelength-demultiplexed scattered signals to be coupled into photodetectors. Three different InGaAs-based detectors by Thorlabs were tested here. Their optical and electrical characteristics are given in Table \ref{table:photodetectors} \cite{datasheet:pda10cf}\cite{datasheet:pda10cs}\cite{datasheet:apd130c}.
@@ -99,7 +101,7 @@ q \approx \SI{97.7}{\micro \volt} \textrm{.}
 \end{equation}
 This will prove sufficiently small when measuring the scattered signals to disregard the quantization noise of the ADC. The PXIe-5160 has an extension card form-factor, and is hosted by a National Instruments PXIe-1082 chassis. The system controller is also present in one of the chassis's slots. The extension card is declared to have a warm-up time of 15 minutes. Two channels, CH2 and CH3, of the DAQ device are used to monitor Stokes and anti-Stokes signals, respectively. On channel CH4 the output signal from an Analog Devices TMP36 calibrated temperature sensor is connected. This device is used to calibrate the temperature offset of the system, by determining the temperature at the beginning of the measurement fibre. The TMP36 is soldered onto a coaxial, and a USB cable in parallel. This enables power supply from the system controller's USB hub. The current temperature can be calculated from sensor's output as \cite{datasheet:tmp36}
 \begin{equation}
-T \, \textrm{[\textdegree C]} = \left( V \, \textrm{[mV]} - V_\textrm{n} \right) \cdot 0.1 \, \textrm{[\textdegree C / mV]} + 25 \, \textrm{\textdegree C}
+T \, \textrm{[\textdegree C]} = \left( V \, \textrm{[mV]} - V_\textrm{n} \, \textrm{[mV]} \right) \cdot 0.1 \, \textrm{[\textdegree C / mV]} + 25 \, \textrm{\textdegree C}
 \end{equation}
 \begin{equation}
 V_\textrm{n} = \SI{750}{\milli \volt} \textrm{.}

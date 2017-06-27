@@ -54,11 +54,11 @@ The refractive index is taken as wavelength-dependant, and the free-space wave n
 \begin{equation}
 k_0 = \frac{\omega}{c} = \frac{2 \pi}{\lambda} \textrm{.}
 \end{equation}
-By solving the equation \ref{eq:wave}, one can obtain multiple solutions, each corresponding to one \textit{fibre mode} that is uniquely determined by its propagation constant $\beta_{nm}$. Each mode has its own \textit{mode index}, or \textit{effective index}, that is determined as
+By solving the equation \ref{eq:wave}, one can obtain multiple solutions, each corresponding to one \textit{fibre mode} that is uniquely determined by its propagation constant $\beta_{nm}$. Each mode has its own \textit{mode index}, or \textit{effective index}, determined as
 \begin{equation}
-\bar{n} = \beta/k_0 \textrm{,}
+\overline{n} = \beta/k_0 \textrm{,}
 \end{equation}
-whose value lies within $n_1 > \bar{n} > n_2$. At $\bar{n} = n_2$, the mode in question is said to be in \textit{cut-off}, and is no longer guided. The parameter $V$, called \textit{normalized frequency}, is used to determine the cut-off condition.
+and whose value lies within $n_1 > \overline{n} > n_2$. At $\overline{n} = n_2$, the mode in question is said to be in \textit{cut-off}, and is no longer guided. The parameter $V$, called \textit{normalized frequency}, is used to determine the cut-off condition.
 \begin{equation}
 V = k_0 \, a \, \sqrt{n_1^2 - n_2^2} \approx \frac{2 \pi}{\lambda} a n_1 \sqrt{2 \varDelta}
 \end{equation}
@@ -87,9 +87,9 @@ Here, $C$ is a fibre-dependent constant, ranging around $\SI{0.7}{(\decibel / \k
 
 The propagation constant $\beta$ is frequency-dependent. Therefore, its frequency-dependent expression is also known as \textit{the dispersion relation} \cite{chalmers:foc}. It can be expanded into Taylor's series
 \begin{equation}
-\beta(\omega) = \beta_0 + \beta_1 \frac{d \beta}{d \omega} + \frac{1}{2} \beta_2 \frac{d^2 \beta}{d \omega^2} + \frac{1}{6} \beta_3 \frac{d^3 \beta}{d \omega^3} + \dots \textrm{.}
+\beta(\omega) = \beta_0 + \beta_1 \frac{d \beta}{d \omega} + \frac{1}{2} \beta_2 \frac{d^2 \beta}{d \omega^2} + \frac{1}{6} \beta_3 \frac{d^3 \beta}{d \omega^3} + \dots \, \textrm{.}
 \end{equation}
-The important coefficients are defined here, the first being $\beta_0$, which defines the phase velocity of a monochromatic wave
+A number of important coefficients are defined here, the first being $\beta_0$, which defines the phase velocity of a monochromatic wave
 \begin{equation}
 v_p = \frac{\omega_0}{\beta_0} \textrm{.}
 \end{equation}
@@ -110,9 +110,9 @@ Due to its imperfectly cylindrical shape, every fibre exhibits \textit{birefring
 	\caption{Polarization state exchange in a birefringent fibre \cite{agrawal}}
 	\label{fig:birefringence}
 \end{figure}
-This is due to different refractive indices on two axes, $\bar{n_x}$ and $\bar{n_y}$. They are commonly related by a quantity called \textit{birefringence}
+This is due to different refractive indices on two axes, $\overline{n_x}$ and $\overline{n_y}$. They are commonly related by a quantity called \textit{birefringence}
 \begin{equation}
-B_m = \left| \bar{n_x} - \bar{n_y} \right| \textrm{.}
+B_m = \left| \overline{n_x} - \overline{n_y} \right| \textrm{.}
 \end{equation}
 The \textit{beat length} is obtained as
 \begin{equation}
@@ -121,9 +121,9 @@ L_B = \lambda / B_m \textrm{.}
 
 Fundamental non-linear effects are self-phase modulation (abbr. SPM) and cross-phase modulation (abbr. XPM). The former is the result of a power-dependant propagation constant
 \begin{equation}
-\beta(P) = \beta + k_0 \frac{\bar{n_2} P}{A_\textrm{eff}} = \beta + \gamma P \textrm{,}
+\beta(P) = \beta + k_0 \frac{\overline{n_2} P}{A_\textrm{eff}} = \beta + \gamma P \textrm{,}
 \end{equation}
-where $\bar{n_2}$ is the non-linear index coefficient, and $\gamma$ a \textit{non-linear parameter}. The phase shift for SPM can be obtained as
+where $\overline{n_2}$ is the non-linear index coefficient, and $\gamma$ a \textit{non-linear parameter}. The phase shift for SPM can be obtained as
 \begin{equation}
 \phi_\textrm{SPM} = \gamma P_\textrm{in} L_\textrm{eff} \textrm{.}
 \end{equation}
@@ -133,16 +133,21 @@ L_\textrm{eff} = \frac{1 - \exp\left(-\alpha \, L\right)}{\alpha} \approx \frac{
 \end{equation}
 Similarly to the propagation constant, the refractive index is also power-dependent.
 \begin{equation}
-n(P) = \bar{n_0} + \bar{n_2} \frac{P}{A_\textrm{eff}} \textrm{.}
+n(P) = \overline{n_0} + \overline{n_2} \frac{P}{A_\textrm{eff}} \textrm{.}
 \end{equation}
-Here, $\bar{n_0}$ is the \textit{linear refractive index}. Fibres with a large $\bar{n_2}$ are called highly non-linear fibres \cite{Hiroishi2003}. If a number of signals are transmitted through a fibre in a wave-division multiplex (abbr. WDM), optical powers of all multiplexed signals will contribute to an increase in $\beta$ and $n$. Therefore, the phase shift for the worst-case scenario in channel $i$ is given as
+Here, $\overline{n_0}$ is the \textit{linear refractive index}. Fibres with a large $\overline{n_2}$ are called highly non-linear fibres \cite{Hiroishi2003}. If a number of signals are transmitted through a fibre in a wave-division multiplex (abbr. WDM), optical powers of all multiplexed signals will contribute to an increase in $\beta$ and $n$. Therefore, the phase shift for the worst-case scenario in channel $i$ is given as
 \begin{equation}
 \phi_{i,\textrm{NL}} = \gamma L_\textrm{eff} \left( P_i + 2 \sum_{j\ne i} P_j \right) \textrm{.}
 \end{equation}
 A special case of XPM, when very short optical pulses are being sent, is non-dispersive XPM. Due to birefringence, two orthogonal components will interact, causing phase shifts in each component at a single wavelength
-\begin{eqnarray}
-\phi_x = \gamma \left(P_x + B P_y\right) L_\textrm{eff} & \phi_y = \gamma \left( P_y + B P_x \right) L_\textrm{eff} \textrm{.}
-\end{eqnarray}
+\begin{subequations}
+	\begin{equation}
+	\phi_x = \gamma \left(P_x + B P_y\right) L_\textrm{eff}
+	\end{equation}
+	\begin{equation}
+	\phi_y = \gamma \left( P_y + B P_x \right) L_\textrm{eff} \textrm{.}
+	\end{equation} 
+\end{subequations}
 The total phase shift from SPM and non-dispersive XPM is given as
 \begin{equation}
 \phi_\textrm{XPM} = \gamma L_\textrm{eff} \left(1 - B\right) \left(P_x - P_y\right) \textrm{.}
@@ -150,7 +155,7 @@ The total phase shift from SPM and non-dispersive XPM is given as
 
 In communication systems, the maximum tolerable phase shift is taken as $\phi_\textrm{NL} < 0.1$. Therefore, communication systems use power levels that are not to exceed
 \begin{equation}
-P_\textrm{in} < 0.1 \frac{\alpha}{\gamma N_A} \textrm{,}
+P_\textrm{in} < 0.1 \frac{\alpha}{\gamma} \frac{1}{N_A} \textrm{,}
 \end{equation}
 where $N_A$ is the number of amplifiers used. Therefore, SPM alone is a major limiting factor in long-haul optical systems.
 
@@ -183,7 +188,7 @@ For silica fibre, and a typical pump wavelength of 1.55 \textmu m, the frequency
 \begin{equation}
 \nu_B = \SI{11.1}{\giga \hertz} \textrm{.}
 \end{equation}
-This frequency shift can easily be monitored by radio-frequency electronics. The value of the frequency shift is temperature- and strain-dependent. Typically, the Brillouin frequency shift advances at rates about $C_{\nu\theta} = \SI{1.10}{\mega \hertz \, \kelvin^{-1}}$ and $C_{\nu\epsilon} = \SI{48}{\kilo \hertz \, \epsilon^{-1}}$. The width of Stokes and anti-Stokes lines is typically 30--40 MHz. Monitoring the central frequencies, one can obtain the information about temperature and strain along the fibre. \\
+This frequency shift can easily be monitored by radio-frequency electronics. The value of the frequency shift is temperature- and strain-dependent. Typically, the Brillouin frequency shift advances at rates about $C_{\nu\theta} = \SI{1.10}{\mega \hertz \, \kelvin^{-1}}$ and $C_{\nu\epsilon} = \SI{48}{\kilo \hertz \, \epsilon^{-1}}$. The width of Stokes and anti-Stokes lines is typically 30 -- 40 MHz. Monitoring the central frequencies, one can obtain the information about temperature and strain along the fibre. \\
 
 This measurement method will be efficient in the spontaneous Brillouin scattering regime. In it, the scattered wave is generated spontaneously, as fibre molecules are already thermally excited. Provided the incident optical power is large enough, the produced scattered wave will beat with the pump wave, increasing the amplitude of the scattered wave. Such a phenomenon is then referred to as the stimulated Brillouin scattering (abbr. SBS). In order for simulated scattering to occur, the pump pulse power must be over the threshold level. This level is dependent on Brillouin gain $g_B$, and the effective cross-section area of the fibre in question 
 \begin{equation}
@@ -227,12 +232,14 @@ Typically, a Raman shift is about 13 THz, which is far larger than Brillouin shi
 \lambda_0 = \SI{1550}{\nano \meter}
 \end{equation}
 Stokes and anti-Stokes central wavelengths are around
-\begin{equation}
-\lambda_S = \SI{1650}{\nano \meter}
-\end{equation}
-\begin{equation}
-\lambda_{AS} = \SI{1450}{\nano \meter} \textrm{.}
-\end{equation}
+\begin{subequations}
+	\begin{equation}
+	\lambda_S = \SI{1650}{\nano \meter}
+	\end{equation}
+	\begin{equation}
+	\lambda_{AS} = \SI{1450}{\nano \meter} \textrm{.}
+	\end{equation}
+\end{subequations}
 Such frequency shifts can not be observed in the electrical domain, as was the case for Brillouin shifts. Signals at new wavelengths will have to be monitored optically. In this case, temperature information is not coded in the spectrum of scattered signals, but rather in the amplitude. Therefore, Raman-shifted components can be optically filtered and easily detected. \\
 
 In equations \ref{eq:be-s} and \ref{eq:be-as}, one can observe their dependence on the exact energy differences $\varDelta E$. Raman spectrum is very broad, in contrast to a narrow-band Brillouin spectrum. It can be illustrated as in Figure \ref{fig:raman_spectrum}.
@@ -242,7 +249,7 @@ In equations \ref{eq:be-s} and \ref{eq:be-as}, one can observe their dependence 
 	\caption{Raman scattering spectrum \cite{fer:oks}}
 	\label{fig:raman_spectrum}
 \end{figure}
-Typically, the bandwidth of scattered signals is 20--30 THz. These spectra can be well-approximated by a triangular characteristic. Therefore, $\varDelta E$ should be taken by calculating, or measuring effective wavelengths of Stokes and anti-Stokes spectra. \\
+Typically, the bandwidth of scattered signals is 20 -- 30 THz. These spectra can be well-approximated by a triangular characteristic. Therefore, $\varDelta E$ should be taken by calculating, or measuring effective wavelengths of Stokes and anti-Stokes spectra. \\
 
 Similar to Brillouin scattering, Raman effect can also be spontaneous or stimulated. In stimulated Raman scattering (abbr. SRS), the pump wave will beat with the spontaneously produced Raman-scattered wave. The beating will induce more molecular oscillations, creating a positive feedback loop to the scattered signal. The phenomenon sets in after the incident optical power crosses the threshold value, defined as
 \begin{equation} \label{eq:raman_threshold}
