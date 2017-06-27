@@ -6,3 +6,4 @@
 *.synctex.gz
 *.bbl
 *.blg
+!diplomski_zadatak_*.pdf
