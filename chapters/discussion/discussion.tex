@@ -22,19 +22,19 @@ The theoretical background assumes a step-like optical excitation of the measure
 \begin{equation}
 y(t) = l(t) \ast h(t) \textrm{.}
 \end{equation}
-In situations where the laser pulse is extremely malformed, it is advisable to perform deconvolution an re-convolution with a numerical step excitation
+In situations where the laser pulse is extremely malformed, it is advisable to perform deconvolution an re-convolution with a step excitation
 \begin{equation}
 s(t) = \mu(t) - \mu(t-T) \textrm{,}
 \end{equation}
-as follows
+where $\mu(t)$ is the elementary step signal. After re-convolving, we arrive at fibre measurement system step response
 \begin{equation}
 r(t) = s(t) \ast h(t) \textrm{.}
 \end{equation}
-Here, $s(t)$ is taken as a step signal, whose length $T$ matches the configured laser pulse width. Signal $r(t)$ is the step-response of the fibre measurement system. The impulse response $h(t)$ can be found by some of the deconvolution algorithms \cite{fer:obrinf}. Here, a Fast-Fourier-transform-based (abbr. FFT) algorithm was used to apply the suggested procedure and determine the effect of the irregular laser pulse. The transfer function $H(j\omega)$ of the measurement fibre was found as a ratio of Fourier transforms of the measured laser pulse and system response
+Here, the length $T$ of step signal $s(t)$ matches the configured laser pulse width. The impulse response $h(t)$ can be found by some of the deconvolution algorithms \cite{fer:obrinf}. Here, a Fast-Fourier-transform-based (abbr. FFT) algorithm was used to apply the suggested procedure and determine the effect of the irregular laser pulse. The transfer function $H(j\omega)$ of the measurement fibre was found as a ratio of Fourier transforms of the measured laser pulse and system response
 \begin{equation}
 H(j\omega) = \frac{Y(j\omega)}{L(j\omega)} \textrm{.}
 \end{equation}
-The impulse response was then calculated as the inverse FFT and convoluted by $s(t)$. The procedure, however, required very large memory resources, and was questioned to have large influence on the final measurement, in comparison to photodetectors' bandwidth issues. Therefore, after some tests that proved no significant difference would be made, the correction was concluded to be unnecessary, and scrapped. \\
+The impulse response was then calculated as the inverse FFT and convolved by $s(t)$. The procedure, however, required very large memory resources, and was questioned to have large influence on the final measurement, in comparison to photodetectors' bandwidth issues. Therefore, after some tests that proved no significant difference would be made, the correction was concluded to be unnecessary, and scrapped. \\
 
 Limitations on the data acquisition rate, considering the rate of data transfer between the DAQ card and the acquisition software, and not the sampling rate itself, have already been emphasised in chapter \ref{ch:results}. Better acquisition mechanism should be implemented. The first suggestion is to abandon the use of Express VIs, which may be poorly optimized, although they provide a user-friendlier configuration interface. Use of classic LabVIEW blocks may provide better overall performance. \\
 

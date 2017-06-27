@@ -13,7 +13,7 @@ Optical fibres can be used to measure a variety of physical quantities, utilizin
 \begin{description}
 	\item[Phase-modulated] -- The detected signal is usually compared with a reference by interferometric methods.
 	\item[Intensity-modulated] -- A form of amplitude modulation by an optical effect.
-	\item[Wavelength-modulated] -- Perturbation in the parameter of interest changes physical characteristics of the fibre, inducing a non-linear effect.
+	\item[Wavelength-modulated] -- Perturbation in the parameter of interest changes physical characteristics of the measurement fibre or fibre-based sensor, inducing a non-linear effect.
 	\item[Scattering-based] -- An Optical time-domain interferometer (abbr. OTDR) monitors a backscattered signal produced as a result of intrinsic optical effects.
 	\item[Polarization-based] -- Perturbation in the parameter of interest changes the polarization of an incident signal, and causes formation of cross-polarized elements.
 \end{description}
@@ -39,11 +39,7 @@ A laser is placed at the beginning of the measurement fibre, and its optical out
 \begin{equation}
 \alpha = \alpha_R + \alpha_a \textrm{,}
 \end{equation}
-where $\alpha_R$ is the contribution of Rayleigh scattering to total losses. Rayleigh scattering occurs as a result of microscopic fluctuations in density, leading to small perturbations in refractive index. The scattering cross-section is largely dependent on wavelength, so $\alpha_R$ can be expressed as
-\begin{equation}
-\alpha_R = \frac{C}{\lambda^4} \textrm{.}
-\end{equation}
-Here, $C$ is a fibre-dependent constant, ranging around $\SI{0.7}{(\decibel / \kilo \meter) \, \micro \meter ^4} < C < \SI{0.9}{(\decibel / \kilo \meter) \, \micro \meter ^4}$, producing a Rayleigh-limited attenuation coefficient around $\SI{0.12}{\decibel / \kilo \meter} < \alpha_R < \SI{0.16}{\decibel / \kilo \meter}$ at the wavelength of 1.55 \textmu m. The attenuation of optical power, as the light propagates through a medium, is governed by Beer's law as
+where $\alpha_R$ is the contribution of Rayleigh scattering to total losses, and $\alpha_a$ the contribution of all other losses. Rayleigh scattering occurs as a result of microscopic fluctuations in density, leading to small perturbations in refractive index. The scattering cross-section is largely dependent on wavelength, as seen in equation \ref{eq:rayleigh_loss}. The attenuation of optical power, as the light propagates through a medium, is governed by Beer's law as
 \begin{equation}
 \frac{dP}{dz} = -\alpha P \textrm{.}
 \end{equation}
@@ -119,7 +115,7 @@ Chapter \ref{ch:fibres} identifies Stokes and anti-Stokes-shifted scattered sign
 \begin{equation}
 R(T) = \frac{P_{AS}(z_0)}{P_S(z_0)} = \frac{G_\textrm{AS}}{G_\textrm{S}} \left( \frac{\lambda_S}{\lambda_{AS}} \right)^4 \exp\left( - \frac{\varDelta E}{k T} + \varDelta \alpha_P \, z_0 \right) \textrm{.}
 \end{equation}
-Terms $G_\textrm{S}$ and $G_\textrm{AS}$ are gain coefficients of measurement chains on Stokes and anti-Stokes channels, respectively. These include different photodiode responsivities, gains and probe attenuations. Term $\varDelta \alpha_P$ is the difference of attenuation coefficients at pump wavelength and scattered wavelengths. The characteristic of the $\alpha(\omega)$ function is assumed to be linear, and Raman spectrum generally symmetrical. Therefore, only one calculation for $\varDelta \alpha$ should be performed. Finally, temperature in kelvins at position $z_0$ is found as
+Terms $G_\textrm{S}$ and $G_\textrm{AS}$ are gain coefficients of measurement chains on Stokes and anti-Stokes channels, respectively. These include different photodiode responsivities, gains and probe attenuations. Term $\varDelta \alpha_P$ is the difference of attenuation coefficients at pump wavelength and scattered wavelengths. The characteristic of the $\alpha(\omega)$ function is assumed to be linear, and Raman spectrum generally symmetrical. Therefore, only one estimation for $\varDelta \alpha$ should be performed. Finally, temperature in kelvins at position $z_0$ is found as
 \begin{equation} \label{eq:stokes_temperature}
 T(z_0) = \frac{\varDelta E}{k \, \ln \left[ \frac{I_S}{I_{AS}} \frac{\Re_{AS}}{\Re_S} \frac{G_{AS}}{G_S} \left(\frac{\lambda_S}{\lambda_{AS}}\right)^4 \right] + \varDelta \alpha_P z_0 } \textrm{,}
 \end{equation}

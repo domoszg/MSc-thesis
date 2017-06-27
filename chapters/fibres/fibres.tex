@@ -48,7 +48,7 @@ The gradual decrease in core's refractive index leads to better light confinemen
 
 Light propagating in the optical fibre can also be observed as a travelling wave. Its propagation is governed by the wave equation
 \begin{equation} \label{eq:wave}
-\nabla^2 \mathbf{E} + n^2(\omega) \, k_0^2 \, \mathbf{E} = 0 \textrm{.}
+\nabla^2 \mathbf{E} + n^2(r,\omega) \, k_0^2 \, \mathbf{E} = 0 \textrm{.}
 \end{equation}
 The refractive index is taken as wavelength-dependant, and the free-space wave number $k_0$ is
 \begin{equation}
@@ -75,11 +75,15 @@ Under normal conditions, the attenuation of optical power in a fibre is governed
 \begin{equation}
 P(z_0) = P_\textrm{in} \exp\left(-\alpha z_0\right) \textrm{,}
 \end{equation}
-where $\alpha$ is the attenuation coefficient in units of Np/km. For convenience, $\alpha$ is usually expressed in units of dB/km. Losses in a fibre depend on the optical wavelength. In communication systems, three \emph{optical communication windows} were defined by wavelengths at which silica fibre exhibits minimum losses. The first is around 850 nm (not as used in modern systems), the second around 1310 nm and the third around 1550 nm. These windows are the result of wavelength-dependent material absorption, i.e. the absorption by fused silica, that features minimum contribution at wavelengths around these windows, but exhibits high losses at some other characteristic wavelengths. The source of other losses is, by a large extent, Rayleigh scattering, which is a fundamental loss mechanism. It arises from microscopic density fluctuations of silica that lead to refractive index fluctuations on a scale smaller than the optical wavelength. The contribution of Rayleigh scattering to the overall fibre loss can be expressed as
+where $\alpha$ is the attenuation coefficient in units of Np/km. For convenience, $\alpha$ is usually expressed in units of dB/km. The two units are related as
 \begin{equation}
-\alpha_\textrm{Ray} = C / \lambda^4 \textrm{.}
+\alpha \,\textrm{[Np/km]} = 10\log(e) \cdot \alpha \,\textrm{[dB/km]} \approx 4.343 \cdot \alpha \,\textrm{[dB/km]} \textrm{.}
 \end{equation}
-Rayleigh scattering is, thus, largely dependent on wavelength. \\
+Losses in a fibre depend on the optical wavelength. In communication systems, three \emph{optical communication windows} were defined by wavelengths at which silica fibre exhibits minimum losses. The first is around 850 nm (nowadays used only in local communication networks), the second around 1310 nm and the third around 1550 nm. These windows are the result of wavelength-dependent material absorption, i.e. the absorption by fused silica, that features minimum contribution at wavelengths around these windows, but exhibits high losses at some other characteristic wavelengths. The source of other losses is, by a large extent, Rayleigh scattering, which is a fundamental loss mechanism. It arises from microscopic density fluctuations of silica that lead to refractive index fluctuations on a scale smaller than the optical wavelength. The contribution of Rayleigh scattering to the overall fibre loss can be expressed as
+\begin{equation} \label{eq:rayleigh_loss}
+\alpha_\textrm{R} = C / \lambda^4 \textrm{.}
+\end{equation}
+Here, $C$ is a fibre-dependent constant, ranging around $\SI{0.7}{(\decibel / \kilo \meter) \, \micro \meter ^4} < C < \SI{0.9}{(\decibel / \kilo \meter) \, \micro \meter ^4}$, producing a Rayleigh-limited attenuation coefficient around $\SI{0.12}{\decibel / \kilo \meter} < \alpha_R < \SI{0.16}{\decibel / \kilo \meter}$ at the wavelength of 1.55 \textmu m. Rayleigh scattering is largely dependent on wavelength. \\
 
 The propagation constant $\beta$ is frequency-dependent. Therefore, its frequency-dependent expression is also known as \textit{the dispersion relation} \cite{chalmers:foc}. It can be expanded into Taylor's series
 \begin{equation}
@@ -91,9 +95,9 @@ v_p = \frac{\omega_0}{\beta_0} \textrm{.}
 \end{equation}
 The next, $\beta_1$ is the group velocity dispersion parameter. It defines pulse broadening during propagation, which leads to a linear effect of dispersion. The total dispersion can be expressed as
 \begin{equation}
-\varDelta T = L \beta_2 \varDelta \omega \textrm{.}
+\varDelta T = L \beta_2 \varDelta \omega \textrm{,}
 \end{equation}
-Parameter $\beta_2$ describes the material dispersion and waveguide dispersion, while higher-order dispersions are also governed by term $\beta_3$. It is clear that the dispersion poses a major limiting factor in long-haul or high-bit-rate communications.
+where $\varDelta \omega$ is the frequency spread of the optical signal. Parameter $\beta_2$ describes the material dispersion and waveguide dispersion, while higher-order dispersions are also governed by term $\beta_3$. It is clear that the dispersion poses a major limiting factor in long-haul or high-bit-rate communications.
 
 \section{Non-linear optical effects}
 
@@ -129,9 +133,9 @@ L_\textrm{eff} = \frac{1 - \exp\left(-\alpha \, L\right)}{\alpha} \approx \frac{
 \end{equation}
 Similarly to the propagation constant, the refractive index is also power-dependent.
 \begin{equation}
-n(P) = \bar{n_0} + \bar{n_2} \frac{P}{A_eff} \textrm{.}
+n(P) = \bar{n_0} + \bar{n_2} \frac{P}{A_\textrm{eff}} \textrm{.}
 \end{equation}
-Here, $\bar{n_0}$ is the \textit{linear refractive index}. Fibres with a large $\bar{n_2}$ are called highly non-linear fibres \cite{Hiroishi2003}. If a number of signals are transmitted through a fibre in a wave-division multiplex (abbr. WDM), optical powers of all multiplexed signals will contribute to an increase in $\beta$ and $n$. Therefore, the phase shift in channel $i$ is given as
+Here, $\bar{n_0}$ is the \textit{linear refractive index}. Fibres with a large $\bar{n_2}$ are called highly non-linear fibres \cite{Hiroishi2003}. If a number of signals are transmitted through a fibre in a wave-division multiplex (abbr. WDM), optical powers of all multiplexed signals will contribute to an increase in $\beta$ and $n$. Therefore, the phase shift for the worst-case scenario in channel $i$ is given as
 \begin{equation}
 \phi_{i,\textrm{NL}} = \gamma L_\textrm{eff} \left( P_i + 2 \sum_{j\ne i} P_j \right) \textrm{.}
 \end{equation}
@@ -156,11 +160,11 @@ where $N_A$ is the number of amplifiers used. Therefore, SPM alone is a major li
 In distributed temperature sensing systems (abbr. DTS), two non-linear scattering effects can be effectively used \cite{epflBookInelastic}. The first is Brillouin effect. It is a result of the electrostriction phenomenon, i.e. the compression of the material in the presence of an electromagnetic field \cite{agrawalNonlinear}. The optical pulse functions as a pump, exciting molecules in the fibre from the ground state into a higher, virtual state. The decay of these states will produce a Stokes component -- with the wavelength being longer than that of the incident optical wave -- or an anti-Stokes component, with the wavelength being shorter than that of the incident optical wave. An illustration of this shift is given in Figure \ref{fig:freq_shift}.
 \begin{figure}[h]
 	\centering
-	\begin{subfigure}[b]{0.4\textwidth}
+	\begin{subfigure}[b]{0.35\textwidth}
 		\includegraphics[width=\textwidth]{freq_shift_stokes.png}
 		\caption{Stokes shift}
 	\end{subfigure}
-	\begin{subfigure}[b]{0.4\textwidth}
+	\begin{subfigure}[b]{0.35\textwidth}
 		\includegraphics[width=\textwidth]{freq_shift_antistokes.png}
 		\caption{Anti-Stokes shift}
 	\end{subfigure}
@@ -214,7 +218,7 @@ A similar differential power expression can be expressed for the anti-Stokes shi
 \end{equation}
 Here, $\varDelta E$ is defined as
 \begin{equation}
-\varDelta E = \hbar \left( \omega_P - \omega_AS \right) \textrm{.}
+\varDelta E = \hbar \left( \omega_P - \omega_{AS} \right) \textrm{.}
 \end{equation}
 The different distribution terms arise from the fact that anti-Stokes radiation produces photons of larger energy than the incident pump photon. The energy difference must be provided by the excited molecule itself, and therefore the term must account for the number of molecules available in the proper vibrational state. It is now clear that both shifted components have a temperature dependence, but also that the dependence is much larger for the anti-Stokes component. \\
 
