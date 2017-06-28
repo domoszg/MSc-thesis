@@ -180,7 +180,9 @@
 	\newpage
  	\setcounter{page}{5}
 	\vspace*{\fill}
-	\hfil {\itshape #1}\hfil
+	\begin{flushright}
+		{\itshape #1}
+	\end{flushright}
 	\vspace*{\fill}
 	\@dodanazahvalatrue
 }
